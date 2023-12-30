@@ -23,4 +23,10 @@ export const GridContainer = styled.div`
   gap: 20px;
   justify-content: center;
   margin-top: 20px;
+
+  @media (max-width: 768px) {
+    display: block;
+    // align-items: center;
+    margin-left: 120px;
+  }
 `

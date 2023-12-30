@@ -5,12 +5,6 @@ export const ContainerApresentacao = styled.div`
   position: relative;
   width: 1366px;
   margin: auto;
-
-  media (max-width: 768px) {
-    position: relative;
-    width: 768px;
-    margin: auto;
-  }
 `
 
 export const TextoItaliana = styled.p`

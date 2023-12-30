@@ -16,11 +16,6 @@ export const CardContainer = styled.div`
   margin: 10px;
   padding: 10px;
   width: 200px;
-
-  @media (max-width: 768px) {
-    width: 30px;
-    margin: 10px;
-  }
 `
 export const Borda = styled.div`
   padding: 1px 10px;
@@ -88,7 +83,4 @@ export const ButtonItaliano = styled(Buttonn)`
   position: absolute;
   top: 25px;
   left: 370px;
-  @media (max-width: 768px) {
-    left: 200px;
-  }
 `

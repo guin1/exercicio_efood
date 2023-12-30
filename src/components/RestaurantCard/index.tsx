@@ -19,7 +19,7 @@ interface RestaurantCardProps {
 }
 
 const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => (
-  <CardContainer className="restaurant-card">
+  <CardContainer>
     <ImgRestaurant src={restaurant.image} alt={restaurant.name} />
     <Borda>
       <TituloText>

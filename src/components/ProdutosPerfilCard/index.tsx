@@ -37,7 +37,7 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
       <TextoPizza>{produto.text}</TextoPizza>
       <div>
         <ButtonSabiaMais onClick={handleAdicionarCarrinho}>
-          Adicionar ao carrinho
+          Mais detalhes
         </ButtonSabiaMais>
       </div>
       {exibirBarraLateral && (

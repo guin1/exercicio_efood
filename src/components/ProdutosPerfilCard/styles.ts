@@ -37,6 +37,7 @@ export const ImagemPizza = styled.img`
   cursor: pointer;
 `
 export const ButtonSabiaMais = styled.button`
+  font-family: 'Roboto', sans-serif;
   color: ${cores.rosa};
   border: none;
   width: 100%;

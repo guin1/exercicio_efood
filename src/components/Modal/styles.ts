@@ -64,6 +64,7 @@ export const ModalDescription = styled.p`
 `
 
 export const ModalCloseButton = styled.button`
+  font-family: 'Roboto', sans-serif;
   background-color: ${cores.branca};
   color: ${cores.rosa};
   font-size: 16px;

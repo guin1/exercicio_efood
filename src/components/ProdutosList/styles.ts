@@ -15,7 +15,6 @@ export const ListContainer = styled.div`
   @media (max-width: 768px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 40px;
   }
 `

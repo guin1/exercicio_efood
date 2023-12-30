@@ -15,7 +15,7 @@ export const ContainerPerfil = styled.div`
 
   @media (max-width: 768px) {
     height: 92px;
-    width: 680px;
+    width: 750px;
   }
 `
 
