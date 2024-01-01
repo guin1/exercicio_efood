@@ -29,7 +29,7 @@ export const ImgRestaurant = styled.img`
 export const ButtonContain = styled.div`
   position: absolute;
   top: 25px;
-  left: 90%;
+  left: 95%;
   display: inline-block;
   display: flex;
   gap: 5px;
