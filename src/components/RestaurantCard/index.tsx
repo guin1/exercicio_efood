@@ -10,9 +10,11 @@ import {
   TituloText
 } from './styles'
 import { Buttonn } from '../Button/styles'
-import Restaurant from '../../models/Restaurant'
+
+import { NavLink } from 'react-router-dom'
 
 import icon from '../../assets/images/star_favorite.png'
+import { Restaurant } from '../../pages/home'
 
 interface RestaurantCardProps {
   restaurant: Restaurant
@@ -20,12 +22,12 @@ interface RestaurantCardProps {
 
 const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => (
   <CardContainer>
-    <ImgRestaurant src={restaurant.image} alt={restaurant.name} />
+    <ImgRestaurant src={restaurant.capa} alt={restaurant.titulo} />
     <Borda>
       <TituloText>
         <div>
-          {restaurant.name}
-          <span>{restaurant.nota}</span>
+          {restaurant.titulo}
+          <span>{restaurant.avaliacao}</span>
           <img src={icon} alt="IconEstrela" />
         </div>
       </TituloText>
@@ -37,8 +39,10 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => (
       ) : (
         <ButtonItaliano>italiana</ButtonItaliano>
       )}
-      <Text>{restaurant.text}</Text>
-      <ButtonSaibaMais>Saiba mais</ButtonSaibaMais>
+      <Text>{restaurant.descricao}</Text>
+      <NavLink to="/perfil">
+        <ButtonSaibaMais>Saiba mais</ButtonSaibaMais>
+      </NavLink>
     </Borda>
   </CardContainer>
 )

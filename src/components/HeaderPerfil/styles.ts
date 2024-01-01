@@ -7,15 +7,15 @@ export const ContainerPerfil = styled.div`
   align-items: center;
   background-color: #ffebd9;
   padding: 10px;
-  height: 196px;
+  height: 186px;
   width: 1366px;
   position: relative;
   margin: auto;
-  margin-bottom: 5px;
 
   @media (max-width: 768px) {
-    height: 92px;
+    height: 108px;
     width: 750px;
+    margin-bottom: 1px;
   }
 `
 

@@ -11,7 +11,8 @@ export const HeaderBar = styled.div`
   background-image: url(${Vector});
   background-size: cover;
   text-align: center;
-  margin-top: -24px;
+  margin-bottom: 56px;
+  top: -24px;
 
   @media (max-width: 768px) {
     height: 200px;

@@ -13,8 +13,6 @@ export const CardContainer = styled.div`
   display: grid;
   flex-direction: column;
   padding: 20px;
-  margin: 10px;
-  padding: 10px;
   width: 200px;
 `
 export const Borda = styled.div`
@@ -22,7 +20,11 @@ export const Borda = styled.div`
   border: 1px solid ${cores.rosa};
 `
 
-export const ImgRestaurant = styled.img``
+export const ImgRestaurant = styled.img`
+  width: 470px;
+  max-width: 472px;
+  height: 217px;
+`
 
 export const ButtonContain = styled.div`
   position: absolute;

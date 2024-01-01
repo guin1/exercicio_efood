@@ -1,7 +1,7 @@
 import React from 'react'
-import Restaurant from '../../models/Restaurant'
 import RestaurantCard from '../RestaurantCard'
 import { GridContainer, RestaurantListProps } from './styles'
+import { Restaurant } from '../../pages/home'
 
 const RestaurantList: React.FC<RestaurantListProps> = ({
   title,

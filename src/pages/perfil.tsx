@@ -50,8 +50,8 @@ const Perfil: React.FC = () => (
     <Apresentacao />
     <div className="container">
       <ProdutosList produtos={MeusProdutos} />
-      <Footer />
     </div>
+    <Footer />
   </div>
 )
 

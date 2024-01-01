@@ -1,21 +1,17 @@
-import { ButtonPerfil, HeaderBar, HeaderText, LogoImage } from './styles'
+import { HeaderBar, HeaderText, LogoImage } from './styles'
 
 import logo from '../../assets/images/logo.png'
-import { NavLink } from 'react-router-dom'
 
 const HeaderHome = () => (
   <HeaderBar>
     <div>
-      <NavLink to="/">
-        <LogoImage src={logo} alt="Efood" />
-      </NavLink>
+      <LogoImage src={logo} alt="Efood" />
       <HeaderText>
         Viva experiências gastronômicas
         <br />
         no conforto da sua casa
       </HeaderText>
     </div>
-    <ButtonPerfil to="/perfil">Perfil</ButtonPerfil>
   </HeaderBar>
 )
 

@@ -10,6 +10,7 @@ export const FooterContainer = styled.div`
   text-align: center;
   font-size: 14px;
   font-weight: 400;
+  margin-top: 56px;
   color: ${cores.rosa};
   background-color: ${cores.fundo};
 

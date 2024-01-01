@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-import Restaurant from '../../models/Restaurant'
+import { Restaurant } from '../../pages/home'
 
 export interface RestaurantListProps {
   title: string
@@ -13,20 +13,17 @@ export const CardContainer = styled.div`
   align-items: flex-start;
   padding: 20px;
   margin: 10px;
-  padding: 10px;
   width: 200px;
   border: ${cores.rosa};
 `
 export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 5px;
   justify-content: center;
-  margin-top: 20px;
 
   @media (max-width: 768px) {
     display: block;
-    // align-items: center;
     margin-left: 120px;
   }
 `

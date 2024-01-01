@@ -18,7 +18,8 @@ export const ContainerPerfil = styled.div`
   padding: 20px 20px;
   border-radius: 8px;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  margin-top: 56px;
 `
 export const Pizza = styled.h3`
   font-size: 16px;
