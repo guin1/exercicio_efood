@@ -1,6 +1,5 @@
-// Home.tsx
-
 import React, { useState, useEffect } from 'react'
+
 import RestaurantList from '../components/RestaurantList'
 import HeaderHome from '../components/HeaderHome'
 import Footer from '../components/Footer'

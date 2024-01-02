@@ -3,7 +3,7 @@ import { cores } from '../../styles'
 
 export const ContainerApresentacao = styled.div`
   position: relative;
-  width: 1366px;
+  width: 100%;
   margin: auto;
 `
 
@@ -36,6 +36,7 @@ export const TextoLaDolceVita = styled.p`
 export const ImagemApresentacao = styled.img`
   position: relative;
   display: block;
+  width: 100%;
   margin: auto;
 
   media (max-width: 768px) {
