@@ -1,6 +1,7 @@
 import imgapresentacao from '../../assets/images/apresentacao.png'
 import {
   ContainerApresentacao,
+  ContainerTexto,
   ImagemApresentacao,
   TextoItaliana,
   TextoLaDolceVita
@@ -9,8 +10,10 @@ import {
 const Apresentacao = () => (
   <ContainerApresentacao>
     <ImagemApresentacao src={imgapresentacao} alt="macarrão" />
-    <TextoItaliana>Italiana</TextoItaliana>
-    <TextoLaDolceVita>La Dolce Vita Trattoria</TextoLaDolceVita>
+    <ContainerTexto className="container">
+      <TextoItaliana>Italiana</TextoItaliana>
+      <TextoLaDolceVita>La Dolce Vita Trattoria</TextoLaDolceVita>
+    </ContainerTexto>
   </ContainerApresentacao>
 )
 
