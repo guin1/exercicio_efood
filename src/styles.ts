@@ -16,7 +16,6 @@ export const GlobalCss = createGlobalStyle`
   }
 
   body {
-    padding-top: 40px;
     overflow-x: hidden;
   }
 

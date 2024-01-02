@@ -34,8 +34,6 @@ export const TextoLaDolceVita = styled.p`
 `
 
 export const ImagemApresentacao = styled.img`
-  width: 1366px;
-  height: 280px;
   position: relative;
   display: block;
   margin: auto;

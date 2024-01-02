@@ -12,16 +12,15 @@ export const HeaderBar = styled.div`
   background-size: cover;
   text-align: center;
   margin-bottom: 56px;
-  top: -24px;
 
   @media (max-width: 768px) {
     height: 200px;
-    margin-top: -14px;
   }
 `
 
 export const LogoImage = styled.img`
   margin-top: 57.5px;
+
   @media (max-width: 768px) {
     margin-top: 16px;
   }

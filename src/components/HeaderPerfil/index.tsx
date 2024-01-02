@@ -5,23 +5,26 @@ import {
   LeftSection,
   RightSection,
   LogoTexto,
-  ContainerPerfil
+  ContainerPerfil,
+  ContainerCor
 } from './styles'
 
 const HeaderPerfil = () => (
-  <ContainerPerfil>
-    <LeftSection>
-      <LogoTexto>Restaurantes</LogoTexto>
-    </LeftSection>
-    <CenterSection>
-      <NavLink to="/">
-        <img src={logo} alt="Efood" />
-      </NavLink>
-    </CenterSection>
-    <RightSection>
-      <LogoTexto>0 produto(s) no carrinho</LogoTexto>
-    </RightSection>
-  </ContainerPerfil>
+  <ContainerCor>
+    <ContainerPerfil className="container">
+      <LeftSection>
+        <LogoTexto>Restaurantes</LogoTexto>
+      </LeftSection>
+      <CenterSection>
+        <NavLink to="/">
+          <img src={logo} alt="Efood" />
+        </NavLink>
+      </CenterSection>
+      <RightSection>
+        <LogoTexto>0 produto(s) no carrinho</LogoTexto>
+      </RightSection>
+    </ContainerPerfil>
+  </ContainerCor>
 )
 
 export default HeaderPerfil
