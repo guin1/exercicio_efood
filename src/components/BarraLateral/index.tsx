@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   ContainerBarraLateral,
   ContainerButton,
@@ -14,21 +15,30 @@ import {
 } from './styles'
 
 import lixeira from '../../assets/images/lixeira.png'
-import miniPizza from '../../assets/images/mini_pizza.png'
+
+// import miniPizza from '../../assets/images/mini_pizza.png'
+
 import EntregaForm from './Entrega'
 import PagamentoForm from './Pagamento'
 import PedidoConcluido from './PedidoConcluido'
+import { RootState } from '../../store'
+import {
+  handleContinuarClick,
+  handleInputChange,
+  submitInputs,
+  pedidoConcluidoClose
+} from '../../store/reducers/cart'
 
 interface BarraLateralProps {
   produto: {
-    name: string
+    capa: string
+    titulo: string
+    preco: number
   }
   onClose: () => void
 }
+
 const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
-  const [showInputs, setShowInputs] = useState(false)
-  const [showPagamentoInput, setShowPagamentoInput] = useState(false)
-  const [pedidoConcluido, setPedidoConcluido] = useState(false)
   const [inputValues, setInputValues] = useState({
     input1: '',
     input2: '',
@@ -39,7 +49,12 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
     numeroCartao: ''
   })
 
-  const handleInputChange = (
+  const dispatch = useDispatch()
+  const { showInputs, showPagamentoInput, pedidoConcluido } = useSelector(
+    (state: RootState) => state.cart
+  )
+
+  const handleInputChangeLocal = (
     e: React.ChangeEvent<HTMLInputElement>,
     inputName: string
   ) => {
@@ -47,35 +62,19 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
       ...prevValues,
       [inputName]: e.target.value
     }))
+    dispatch(handleInputChange({ inputName, value: e.target.value }))
   }
 
-  const handleContinuarClick = () => {
-    if (showInputs) {
-      setShowInputs(false)
-      setShowPagamentoInput(true)
-    } else if (showPagamentoInput) {
-      console.log('Número do Cartão:', inputValues.numeroCartao)
-      setShowPagamentoInput(false)
-      setPedidoConcluido(true)
-    } else {
-      setShowInputs(true)
-    }
+  const handleContinuarClickLocal = () => {
+    dispatch(handleContinuarClick())
   }
 
-  const submterINputs = () => {
-    if (showPagamentoInput) {
-      setShowPagamentoInput(false)
-      setShowInputs(true)
-    } else if (pedidoConcluido) {
-      setPedidoConcluido(false)
-      onClose()
-    } else {
-      setShowInputs(false)
-    }
+  const submitInputsLocal = () => {
+    dispatch(submitInputs())
   }
 
-  const pedidoConcluidoClose = () => {
-    setPedidoConcluido(false)
+  const pedidoConcluidoCloseLocal = () => {
+    dispatch(pedidoConcluidoClose())
     onClose()
   }
 
@@ -84,27 +83,29 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
       {showInputs ? (
         <EntregaForm
           inputValues={inputValues}
-          handleInputChange={handleInputChange}
-          handleContinuarClick={handleContinuarClick}
-          submterINputs={submterINputs}
+          handleInputChange={handleInputChangeLocal}
+          handleContinuarClick={handleContinuarClickLocal}
+          submterINputs={submitInputsLocal}
         />
       ) : showPagamentoInput ? (
         <PagamentoForm
           inputValues={inputValues}
-          handleInputChange={handleInputChange}
-          handleContinuarClick={handleContinuarClick}
-          submterINputs={submterINputs}
+          handleInputChange={handleInputChangeLocal}
+          handleContinuarClick={handleContinuarClickLocal}
+          submterINputs={submitInputsLocal}
         />
       ) : pedidoConcluido ? (
-        <PedidoConcluido onClose={pedidoConcluidoClose} />
+        <PedidoConcluido onClose={pedidoConcluidoCloseLocal} />
       ) : (
         <div>
-          <CardBarra>
-            <MiniPizzaImage src={miniPizza} alt="" />
-            <ProdutoNome>{produto.name}</ProdutoNome>
-            <PrecoProduto>R$ 60,90</PrecoProduto>
-            <LixeiraImage src={lixeira} alt="" onClick={onClose} />
-          </CardBarra>
+          <ul>
+            <CardBarra>
+              <MiniPizzaImage src={produto.capa} alt={produto.titulo} />
+              <ProdutoNome>{produto.titulo}</ProdutoNome>
+              <PrecoProduto>R$ {produto.preco}</PrecoProduto>
+              <LixeiraImage src={lixeira} alt="lixeira" onClick={onClose} />
+            </CardBarra>
+          </ul>
 
           {/* Conteúdo antes de clicar no botão */}
           <ContainerPreco>
@@ -112,7 +113,7 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
             <PrecoTotal>R$ 122,50</PrecoTotal>
           </ContainerPreco>
           <ContainerButton>
-            <ButtonEntrega onClick={handleContinuarClick}>
+            <ButtonEntrega onClick={handleContinuarClickLocal}>
               Continuar com a entrega
             </ButtonEntrega>
           </ContainerButton>

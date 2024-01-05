@@ -16,7 +16,7 @@ export const ContainerBarraLateral = styled.div`
   }
 `
 
-export const CardBarra = styled.div`
+export const CardBarra = styled.li`
   background-color: ${cores.branca};
   height: 100px;
   width: 300px;
@@ -27,6 +27,8 @@ export const MiniPizzaImage = styled.img`
   position: absolute;
   left: 30px;
   top: 30px;
+  height: 80px;
+  width: 80px;
 `
 export const LixeiraImage = styled.img`
   margin-top: 25px;

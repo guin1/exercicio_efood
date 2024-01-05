@@ -3,10 +3,9 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
 import { GlobalCss } from './styles'
 
-import { store } from './store'
-
 import Home from './pages/home'
 import Perfil from './pages/perfil'
+import store from './store'
 
 function App() {
   return (

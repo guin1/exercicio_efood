@@ -1,58 +1,63 @@
-import Apresentacao from '../components/ApresentacaoPerfil'
+import React, { ReactNode, useEffect, useState } from 'react'
 import HeaderPerfil from '../components/HeaderPerfil'
-import Produto from '../models/Produto'
-import pizza from '../assets/images/pizza.png'
-import ProdutosList from '../components/ProdutosList'
+import Apresentacao from '../components/ApresentacaoPerfil'
 import Footer from '../components/Footer'
+import { MenuItem } from './home'
+import ProdutosList from '../components/ProdutosList'
 
-const MeusProdutos: Produto[] = [
-  {
-    id: 1,
-    name: 'Pizza Marguerita',
-    text: `A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!!!`,
-    image: pizza
-  },
-  {
-    id: 2,
-    name: 'Pizza Calabresa',
-    text: `A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!!!`,
-    image: pizza
-  },
-  {
-    id: 3,
-    name: 'Pizza Marguerita',
-    text: `A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!!!`,
-    image: pizza
-  },
-  {
-    id: 4,
-    name: 'Pizza Marguerita',
-    text: `A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!!!`,
-    image: pizza
-  },
-  {
-    id: 5,
-    name: 'Pizza Marguerita',
-    text: `A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!!!`,
-    image: pizza
-  },
-  {
-    id: 6,
-    name: 'Pizza Marguerita',
-    text: `A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!!!`,
-    image: pizza
+export interface ProdutosPerfilCardProps {
+  produto: {
+    titulo: ReactNode
+    capa: string | undefined
+    name: string
+    image: string
+    text: string
   }
-]
+}
 
-const Perfil: React.FC = () => (
-  <div>
-    <HeaderPerfil />
-    <Apresentacao />
-    <div className="container">
-      <ProdutosList produtos={MeusProdutos} />
+export interface Produto {
+  preco: ReactNode
+  porcao: ReactNode
+  name: string
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
+  descricao: string
+  capa: string
+  cardapio: MenuItem[]
+}
+
+const Perfil: React.FC = () => {
+  const [produtos, setProdutos] = useState<Produto[]>([])
+
+  useEffect(() => {
+    const storedProdutos = localStorage.getItem('produtos')
+
+    if (storedProdutos) {
+      setProdutos(JSON.parse(storedProdutos))
+    } else {
+      fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+        .then((res) => res.json())
+        .then((res) => {
+          setProdutos(res)
+          localStorage.setItem('produtos', JSON.stringify(res))
+        })
+        .catch((error) => console.error('Erro ao carregar produtos:', error))
+    }
+  }, [])
+
+  return (
+    <div>
+      <HeaderPerfil />
+      <Apresentacao />
+      <div className="container">
+        <ProdutosList produtos={produtos} />
+      </div>
+      <Footer />
     </div>
-    <Footer />
-  </div>
-)
+  )
+}
 
 export default Perfil

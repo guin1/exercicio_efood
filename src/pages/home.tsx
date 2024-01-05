@@ -4,7 +4,7 @@ import RestaurantList from '../components/RestaurantList'
 import HeaderHome from '../components/HeaderHome'
 import Footer from '../components/Footer'
 
-interface MenuItem {
+export interface MenuItem {
   foto: string
   preco: number
   id: number
@@ -31,6 +31,7 @@ const Home: React.FC = () => {
     fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
       .then((res) => res.json())
       .then((res) => setRestaurantes(res))
+      .catch((error) => console.error('Erro ao carregar Restaurante:', error))
   }, [])
 
   return (

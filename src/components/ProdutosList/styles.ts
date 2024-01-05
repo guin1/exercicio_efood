@@ -1,9 +1,4 @@
 import styled from 'styled-components'
-import Produto from '../../models/Produto'
-
-export interface ProdutosListProps {
-  produtos: Produto[]
-}
 
 export const ListContainer = styled.div`
   display: grid;

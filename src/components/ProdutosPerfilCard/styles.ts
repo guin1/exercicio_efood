@@ -1,25 +1,15 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
 
-export interface ProdutosPerfilCardProps {
-  name: string
-  image: string
-  produto: {
-    name: string
-    image: string
-    text: string
-  }
-}
-
 export const ContainerPerfil = styled.div`
-  width: 320px;
+  // width: 100%;
+  max-width: 320px;
   height: 338px;
   background-color: ${cores.rosa};
-  padding: 20px 20px;
+  padding: 10px;
   border-radius: 8px;
-  align-items: center;
   margin-bottom: 20px;
-  margin-top: 56px;
+  // margin-top: 56px;
 `
 export const Pizza = styled.h3`
   font-size: 16px;
@@ -33,8 +23,10 @@ export const TextoPizza = styled.picture`
   margin-bottom: 5px;
 `
 export const ImagemPizza = styled.img`
-  heigth: 304px;
-  width: 280px;
+  max-height: 167px;
+  height: 167px;
+  width: 300px;
+  max-width: 300px;
   cursor: pointer;
 `
 export const ButtonSabiaMais = styled.button`

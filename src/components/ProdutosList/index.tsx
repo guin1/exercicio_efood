@@ -1,17 +1,20 @@
 import React from 'react'
-import Produto from '../../models/Produto'
 import ProdutosPerfilCard from '../ProdutosPerfilCard'
-import { ListContainer, ProdutosListProps } from './styles'
+import { ListContainer } from './styles'
+
+import { Produto } from '../../pages/perfil'
+
+export interface ProdutosListProps {
+  produtos: Produto[]
+}
 
 const ProdutosList: React.FC<ProdutosListProps> = ({ produtos }) => (
   <>
     <ListContainer>
-      {produtos.map((produto: Produto) => (
+      {produtos.map((produto) => (
         <ProdutosPerfilCard
           key={produto.id}
-          produto={produto}
-          name={produto.name}
-          image={produto.image}
+          produto={{ ...produto, name: produto.titulo }}
         />
       ))}
     </ListContainer>

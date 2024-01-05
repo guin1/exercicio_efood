@@ -3,11 +3,11 @@ import { Restaurant } from '../pages/home'
 
 const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://fake-api-tau.vercel.app/api/efood/Restaurantes'
+    baseUrl: 'https://fake-api-tau.vercel.app/api/efood'
   }),
   endpoints: (builder) => ({
     getFeaturedRestaurante: builder.query<Restaurant, void>({
-      query: () => 'pratos'
+      query: () => 'restaurantes'
     })
   })
 })

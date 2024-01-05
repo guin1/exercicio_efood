@@ -22,7 +22,6 @@ export const ContainerPerfil = styled.div`
 
 export const LeftSection = styled.div`
   text-align: left;
-  // margin-left: 245px;
 
   @media (max-width: 768px) {
     margin-left: 50px;
@@ -35,6 +34,7 @@ export const CenterSection = styled.div`
 
 export const RightSection = styled.div`
   text-align: right;
+  cursor: pointer;
 `
 export const LogoTexto = styled.p`
   color: ${cores.rosa};
