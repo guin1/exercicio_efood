@@ -1,5 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+type ProdutoNoCarrinho = {
+  id: number
+  capa: string
+  titulo: string
+  preco: number
+}
+
 type CartState = {
   showInputs: boolean
   showPagamentoInput: boolean
@@ -21,6 +28,7 @@ type CartState = {
     titulo: string
     preco: number
   }
+  itensNoCarrinho: ProdutoNoCarrinho[]
 }
 
 const initialState: CartState = {
@@ -38,7 +46,8 @@ const initialState: CartState = {
   },
   produtosNoCarrinho: 0,
   produtoSelecionado: false,
-  items: []
+  items: [],
+  itensNoCarrinho: []
 }
 
 const cartSlice = createSlice({
@@ -95,6 +104,23 @@ const cartSlice = createSlice({
         titulo: action.payload.titulo,
         preco: action.payload.preco
       }
+    },
+    adicionarAoCarrinho: (state, action: PayloadAction<ProdutoNoCarrinho>) => {
+      const { id, capa, titulo, preco } = action.payload
+
+      const produtoExistente = state.itensNoCarrinho.find(
+        (item) => item.id === id
+      )
+
+      if (!produtoExistente) {
+        state.itensNoCarrinho.push({ id, capa, titulo, preco })
+      }
+    },
+    removerDoCarrinho: (state, action: PayloadAction<number>) => {
+      const id = action.payload
+      state.itensNoCarrinho = state.itensNoCarrinho.filter(
+        (item) => item.id !== id
+      )
     }
   }
 })
@@ -105,7 +131,10 @@ export const {
   pedidoConcluidoClose,
   handleInputChange,
   adicionarProduto,
-  selecionarProduto
+  selecionarProduto,
+  atualizarBarraLateral,
+  adicionarAoCarrinho,
+  removerDoCarrinho
 } = cartSlice.actions
 
 export default cartSlice.reducer

@@ -15,41 +15,59 @@ export const ContainerBarraLateral = styled.div`
     width: 330px;
   }
 `
-
 export const CardBarra = styled.li`
+  display: flex;
   background-color: ${cores.branca};
-  height: 100px;
   width: 300px;
   color: ${cores.rosa};
   margin-bottom: 5px;
 `
+
 export const MiniPizzaImage = styled.img`
-  position: absolute;
-  left: 30px;
-  top: 30px;
+  margin: 8px;
+  max-height: 80px;
   height: 80px;
+  max-width: 80px;
   width: 80px;
 `
+
 export const LixeiraImage = styled.img`
-  margin-top: 25px;
-  margin-left: 264px;
+  width: 16px;
+  height: 16px;
+  right: 35px;
+  margin-top: 70px;
+  position: absolute;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 16px;
+    height: 16px;
+    right: 15px;
+    margin-top: 70px;
+  }
 `
+
+export const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+`
+
 export const ProdutoNome = styled.h4`
   font-family: Roboto;
   font-size: 18px;
   color: ${cores.rosa};
-  margin-bottom: 15px;
-  margin-left: 100px;
-  padding-top: 12px;
+  margin-top: 8px;
+  margin-bottom: 10px;
 `
 
 export const PrecoProduto = styled.p`
   font-family: Roboto;
   font-size: 14px;
-  margin-left: 100px;
-  position: absolute;
+  color: ${cores.rosa};
 `
+//valorPreco
+
 export const ContainerPreco = styled.div`
   display: flex;
   justify-content: space-between;

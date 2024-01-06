@@ -16,17 +16,17 @@ export interface ProdutosPerfilCardProps {
 }
 
 export interface Produto {
-  preco: ReactNode
-  porcao: ReactNode
-  name: string
   id: number
+  capa: string
   titulo: string
+  preco: number
   destacado: boolean
   tipo: string
   avaliacao: number
   descricao: string
-  capa: string
   cardapio: MenuItem[]
+  porcao: ReactNode
+  name: string
 }
 
 const Perfil: React.FC = () => {

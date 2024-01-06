@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -11,7 +12,8 @@ import {
   ValorTotal,
   ButtonEntrega,
   LixeiraImage,
-  CardBarra
+  CardBarra,
+  InfoContainer
 } from './styles'
 
 import lixeira from '../../assets/images/lixeira.png'
@@ -26,7 +28,8 @@ import {
   handleContinuarClick,
   handleInputChange,
   submitInputs,
-  pedidoConcluidoClose
+  pedidoConcluidoClose,
+  removerDoCarrinho
 } from '../../store/reducers/cart'
 
 interface BarraLateralProps {
@@ -34,6 +37,7 @@ interface BarraLateralProps {
     capa: string
     titulo: string
     preco: number
+    id: number
   }
   onClose: () => void
 }
@@ -48,6 +52,7 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
     input6: '',
     numeroCartao: ''
   })
+  const { itensNoCarrinho } = useSelector((state: RootState) => state.cart)
 
   const dispatch = useDispatch()
   const { showInputs, showPagamentoInput, pedidoConcluido } = useSelector(
@@ -73,11 +78,14 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
     dispatch(submitInputs())
   }
 
+  const removerProduto = (item: number) => {
+    dispatch(removerDoCarrinho(item))
+  }
+
   const pedidoConcluidoCloseLocal = () => {
     dispatch(pedidoConcluidoClose())
     onClose()
   }
-
   return (
     <ContainerBarraLateral>
       {showInputs ? (
@@ -99,18 +107,29 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
       ) : (
         <div>
           <ul>
-            <CardBarra>
-              <MiniPizzaImage src={produto.capa} alt={produto.titulo} />
-              <ProdutoNome>{produto.titulo}</ProdutoNome>
-              <PrecoProduto>R$ {produto.preco}</PrecoProduto>
-              <LixeiraImage src={lixeira} alt="lixeira" onClick={onClose} />
-            </CardBarra>
+            {itensNoCarrinho.map((item) => (
+              <CardBarra key={item.id}>
+                <MiniPizzaImage src={item.capa} alt={item.capa} />
+                <InfoContainer>
+                  <ProdutoNome>{item.titulo}</ProdutoNome>
+                  <PrecoProduto>R$ {item.preco}</PrecoProduto>
+                </InfoContainer>
+                <LixeiraImage
+                  src={lixeira}
+                  alt="lixeira"
+                  onClick={() => removerProduto(item.id)}
+                />
+              </CardBarra>
+            ))}
           </ul>
 
           {/* Conteúdo antes de clicar no botão */}
           <ContainerPreco>
             <ValorTotal>Valor Total:</ValorTotal>
-            <PrecoTotal>R$ 122,50</PrecoTotal>
+            <PrecoTotal>
+              R${' '}
+              {itensNoCarrinho.reduce((total, item) => total + item.preco, 0)}
+            </PrecoTotal>
           </ContainerPreco>
           <ContainerButton>
             <ButtonEntrega onClick={handleContinuarClickLocal}>

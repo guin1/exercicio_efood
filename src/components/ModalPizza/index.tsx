@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux'
 
+import { adicionarAoCarrinho } from '../../store/reducers/cart'
+
 import {
   ContainerModal,
   ContainerOverlay,
@@ -15,7 +17,6 @@ import {
 // import modalPizza from '../../assets/images/modal_pizza.png'
 
 import excluir from '../../assets/images/excluir.png'
-import { adicionarProduto } from '../../store/reducers/cart'
 import { Produto } from '../../pages/perfil'
 
 export interface ModalProps {
@@ -28,10 +29,16 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
   const dispatch = useDispatch()
 
   const handleClickAdicionarAoCarrinho = () => {
-    dispatch(adicionarProduto())
+    dispatch(
+      adicionarAoCarrinho({
+        id: produto.id,
+        capa: produto.capa,
+        titulo: produto.titulo,
+        preco: produto.cardapio[0].preco
+      })
+    )
 
     onClose()
-    showSidebar()
   }
   const primeiroItemCardapio = produto.cardapio[0]
 
@@ -49,7 +56,7 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
             <ModalTitle>
               <b>{produto.titulo}</b>
             </ModalTitle>
-            <Excluir src={excluir} alt="" onClick={onClose} />{' '}
+            <Excluir src={excluir} alt="excluir" onClick={onClose} />{' '}
             <ModalDescription>
               {produto.descricao}
               <br /> <br /> Serve: {primeiroItemCardapio.porcao}

@@ -53,6 +53,7 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
       {exibirBarraLateral && (
         <BarraLateral
           produto={{
+            id: produto.id,
             capa: produto.capa,
             titulo: produto.titulo,
             preco: produto.cardapio[0].preco
