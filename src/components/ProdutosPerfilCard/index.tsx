@@ -10,7 +10,7 @@ import BarraLateral from '../BarraLateral'
 import Modal from '../ModalPizza'
 import { Produto } from '../../pages/perfil'
 
-interface ProdutosPerfilCardProps {
+export interface ProdutosPerfilCardProps {
   produto: Produto
 }
 
@@ -39,7 +39,7 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
   return (
     <ContainerPerfil>
       <ImagemPizza
-        src={produto.capa}
+        src={produto.foto}
         alt="{produto.capa}"
         onClick={handleImagemPizzaClick}
       />
@@ -54,7 +54,7 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
         <BarraLateral
           produto={{
             id: produto.id,
-            capa: produto.capa,
+            capa: produto.foto,
             titulo: produto.titulo,
             preco: produto.cardapio[0].preco
           }}

@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react'
-
+import React, { useEffect, useState } from 'react'
 import RestaurantList from '../components/RestaurantList'
 import HeaderHome from '../components/HeaderHome'
 import Footer from '../components/Footer'
 
 export interface MenuItem {
+  id: number
   foto: string
   preco: number
-  id: number
   nome: string
   descricao: string
   porcao: string
@@ -32,6 +31,11 @@ const Home: React.FC = () => {
       .then((res) => res.json())
       .then((res) => setRestaurantes(res))
       .catch((error) => console.error('Erro ao carregar Restaurante:', error))
+
+    return () => {
+      // Limpar o localStorage ao desmontar o componente
+      localStorage.removeItem('cardapio')
+    }
   }, [])
 
   return (

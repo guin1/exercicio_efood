@@ -1,59 +1,79 @@
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import HeaderPerfil from '../components/HeaderPerfil'
 import Apresentacao from '../components/ApresentacaoPerfil'
-import Footer from '../components/Footer'
-import { MenuItem } from './home'
 import ProdutosList from '../components/ProdutosList'
+import ProdutosPerfilCard from '../components/ProdutosPerfilCard'
+import Footer from '../components/Footer'
 
 export interface ProdutosPerfilCardProps {
-  produto: {
-    titulo: ReactNode
-    capa: string | undefined
-    name: string
-    image: string
-    text: string
-  }
+  produto: Produto
+}
+
+export interface CardapioItem {
+  id: number
+  capa: string
+  titulo: string
+  preco: number
+  porcao: React.ReactNode
 }
 
 export interface Produto {
   id: number
-  capa: string
+  foto: string
   titulo: string
   preco: number
   destacado: boolean
   tipo: string
   avaliacao: number
   descricao: string
-  cardapio: MenuItem[]
-  porcao: ReactNode
+  cardapio: CardapioItem[]
+  porcao: React.ReactNode
   name: string
 }
 
 const Perfil: React.FC = () => {
-  const [produtos, setProdutos] = useState<Produto[]>([])
+  const { id } = useParams()
+  const [cardapio, setCardapio] = useState<Produto[]>([])
 
   useEffect(() => {
-    const storedProdutos = localStorage.getItem('produtos')
+    const fetchRestaurante = async () => {
+      try {
+        const response = await fetch(
+          `https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`
+        )
+        const data = await response.json()
 
-    if (storedProdutos) {
-      setProdutos(JSON.parse(storedProdutos))
-    } else {
-      fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-        .then((res) => res.json())
-        .then((res) => {
-          setProdutos(res)
-          localStorage.setItem('produtos', JSON.stringify(res))
-        })
-        .catch((error) => console.error('Erro ao carregar produtos:', error))
+        setCardapio(data.cardapio)
+        localStorage.setItem('cardapio', JSON.stringify(data.cardapio))
+      } catch (error) {
+        console.error('Erro ao carregar cardápio:', error)
+      }
     }
-  }, [])
+
+    const storedCardapio = localStorage.getItem('cardapio')
+
+    if (!storedCardapio) {
+      fetchRestaurante()
+    } else {
+      setCardapio(JSON.parse(storedCardapio))
+    }
+  }, [id])
 
   return (
     <div>
       <HeaderPerfil />
       <Apresentacao />
       <div className="container">
-        <ProdutosList produtos={produtos} />
+        {cardapio.length > 0 ? (
+          <ProdutosList produtos={cardapio}>
+            {cardapio.map((produto) => (
+              <ProdutosPerfilCard key={produto.id} produto={produto} />
+            ))}
+          </ProdutosList>
+        ) : (
+          <p>Cardápio não encontrado</p>
+        )}
       </div>
       <Footer />
     </div>

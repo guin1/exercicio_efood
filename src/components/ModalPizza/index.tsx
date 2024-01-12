@@ -14,8 +14,6 @@ import {
   ModalTitle
 } from './styles'
 
-// import modalPizza from '../../assets/images/modal_pizza.png'
-
 import excluir from '../../assets/images/excluir.png'
 import { Produto } from '../../pages/perfil'
 
@@ -32,7 +30,7 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
     dispatch(
       adicionarAoCarrinho({
         id: produto.id,
-        capa: produto.capa,
+        capa: produto.foto,
         titulo: produto.titulo,
         preco: produto.cardapio[0].preco
       })
@@ -51,7 +49,7 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
       />
       <ContainerModal>
         <ModalContent>
-          <ModalImage src={produto.capa} alt={produto.titulo} />
+          <ModalImage src={produto.foto} alt={produto.foto} />
           <ModalText>
             <ModalTitle>
               <b>{produto.titulo}</b>

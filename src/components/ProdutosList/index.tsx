@@ -6,6 +6,7 @@ import { Produto } from '../../pages/perfil'
 
 export interface ProdutosListProps {
   produtos: Produto[]
+  children?: React.ReactNode
 }
 
 const ProdutosList: React.FC<ProdutosListProps> = ({ produtos }) => (
