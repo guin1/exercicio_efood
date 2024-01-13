@@ -27,7 +27,7 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
   }
   const getDescricao = (descricao: string) => {
     if (descricao.length > 200) {
-      return descricao.slice(0, 170) + '...'
+      return descricao.slice(0, 165) + '...'
     }
     return descricao
   }
