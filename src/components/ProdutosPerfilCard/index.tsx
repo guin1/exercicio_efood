@@ -8,11 +8,7 @@ import {
 } from './styles'
 import BarraLateral from '../BarraLateral'
 import Modal from '../ModalPizza'
-import { Produto } from '../../pages/perfil'
-
-export interface ProdutosPerfilCardProps {
-  produto: Produto
-}
+import { ProdutosPerfilCardProps } from '../../pages/perfil'
 
 const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
   const [exibirBarraLateral, setExibirBarraLateral] = useState(false)
@@ -30,7 +26,7 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
     setExibirModal(true)
   }
   const getDescricao = (descricao: string) => {
-    if (descricao.length > 100) {
+    if (descricao.length > 200) {
       return descricao.slice(0, 170) + '...'
     }
     return descricao
@@ -43,7 +39,7 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
         alt="{produto.capa}"
         onClick={handleImagemPizzaClick}
       />
-      <Pizza>{produto.titulo}</Pizza>
+      <Pizza>{produto.nome}</Pizza>
       <TextoPizza>{getDescricao(produto.descricao)}</TextoPizza>
       <div>
         <ButtonSabiaMais onClick={handleAdicionarCarrinho}>

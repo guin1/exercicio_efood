@@ -16,6 +16,7 @@ import {
 
 import excluir from '../../assets/images/excluir.png'
 import { Produto } from '../../pages/perfil'
+import ProdutosPerfilCard from '../ProdutosPerfilCard'
 
 export interface ModalProps {
   onClose: () => void
@@ -27,18 +28,22 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
   const dispatch = useDispatch()
 
   const handleClickAdicionarAoCarrinho = () => {
-    dispatch(
-      adicionarAoCarrinho({
-        id: produto.id,
-        capa: produto.foto,
-        titulo: produto.titulo,
-        preco: produto.cardapio[0].preco
-      })
-    )
+    if (produto.cardapio && produto.cardapio.length > 0) {
+      dispatch(
+        adicionarAoCarrinho({
+          id: produto.id,
+          capa: produto.foto,
+          titulo: produto.titulo,
+          preco: produto.preco
+        })
+      )
 
-    onClose()
+      onClose()
+    }
   }
-  const primeiroItemCardapio = produto.cardapio[0]
+
+  const primeiroItemCardapio =
+    produto.cardapio && produto.cardapio.length > 0 ? produto.cardapio[0] : null
 
   return (
     <>
@@ -50,14 +55,19 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
       <ContainerModal>
         <ModalContent>
           <ModalImage src={produto.foto} alt={produto.foto} />
+          {primeiroItemCardapio && (
+            <ProdutosPerfilCard
+              produto={{ ...produto, cardapio: [primeiroItemCardapio] }}
+            />
+          )}
           <ModalText>
-            <ModalTitle>
-              <b>{produto.titulo}</b>
-            </ModalTitle>
             <Excluir src={excluir} alt="excluir" onClick={onClose} />{' '}
+            <ModalTitle>
+              <b>{produto.nome}</b>
+            </ModalTitle>
             <ModalDescription>
               {produto.descricao}
-              <br /> <br /> Serve: {primeiroItemCardapio.porcao}
+              <br /> <br /> Serve:{produto.porcao}
             </ModalDescription>
             <ModalCloseButton
               onClick={() => {
@@ -66,7 +76,7 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
                 handleClickAdicionarAoCarrinho()
               }}
             >
-              Adicionar ao carrinho - R$ {produto.cardapio[0].preco}
+              Adicionar ao carrinho - R$ {produto.preco}
             </ModalCloseButton>
           </ModalText>
         </ModalContent>

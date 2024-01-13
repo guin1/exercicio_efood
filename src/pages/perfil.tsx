@@ -15,10 +15,11 @@ export interface CardapioItem {
   capa: string
   titulo: string
   preco: number
-  porcao: React.ReactNode
+  porcao: string
 }
 
 export interface Produto {
+  nome: string
   id: number
   foto: string
   titulo: string
