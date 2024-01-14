@@ -67,7 +67,7 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
             </ModalTitle>
             <ModalDescription>
               {produto.descricao}
-              <br /> <br /> Serve:{produto.porcao}
+              <br /> <br /> Serve: {produto.porcao}
             </ModalDescription>
             <ModalCloseButton
               onClick={() => {

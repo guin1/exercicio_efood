@@ -26,13 +26,12 @@ export const ImgRestaurant = styled.img`
   height: 217px;
 `
 
-export const ButtonContain = styled.div`
+export const ButtonContain = styled.button`
   position: absolute;
-  top: 25px;
-  left: 92%;
+  top: 28px;
+  border: none;
+  left: 90%;
   display: inline-block;
-  display: flex;
-  gap: 5px;
   margin-bottom: 10px;
   white-space: nowrap;
 `
@@ -83,6 +82,6 @@ export const TituloText = styled.h3`
 
 export const ButtonItaliano = styled(Buttonn)`
   position: absolute;
-  top: 25px;
+  top: 28px;
   left: 370px;
 `

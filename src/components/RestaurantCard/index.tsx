@@ -29,14 +29,16 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => (
           <img src={icon} alt="IconEstrela" />
         </div>
       </TituloText>
-      {restaurant.id === 1 ? (
-        <ButtonContain>
-          <Buttonn>destaque da semana</Buttonn>
-          <Buttonn>japones</Buttonn>
-        </ButtonContain>
-      ) : (
-        <ButtonItaliano>italiana</ButtonItaliano>
-      )}
+
+      <NavLink to={`/perfil/${restaurant.id}`}>
+        {restaurant.destacado ? (
+          <ButtonContain>
+            <Buttonn>Destaque da semana</Buttonn>
+          </ButtonContain>
+        ) : null}
+        {restaurant.tipo && <ButtonItaliano>{restaurant.tipo}</ButtonItaliano>}
+      </NavLink>
+
       <Text>{restaurant.descricao}</Text>
       <NavLink to={`/perfil/${restaurant.id}`}>
         <ButtonSaibaMais>Saiba mais</ButtonSaibaMais>
