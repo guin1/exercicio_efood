@@ -15,9 +15,7 @@ export const HeaderBar = styled.div`
 
   @media (max-width: 768px) {
     height: 200px;
-    max-width: 800px;
-    width: 768px;
-    margin: auto;
+    // width: 768px;
   }
 `
 
