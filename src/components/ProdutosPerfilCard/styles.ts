@@ -2,14 +2,12 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 
 export const ContainerPerfil = styled.div`
-  // width: 100%;
   max-width: 320px;
-  height: 338px;
+  height: 420px;
   background-color: ${cores.rosa};
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 20px;
-  // margin-top: 56px;
 `
 export const Pizza = styled.h3`
   font-size: 16px;
@@ -39,5 +37,5 @@ export const ButtonSabiaMais = styled.button`
   border-radius: 4px;
   cursor: pointer;
   text-align: center;
-  margin-top: 5px;
+  margin-top: 8px;
 `

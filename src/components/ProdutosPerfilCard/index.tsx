@@ -25,12 +25,13 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
   const handleImagemPizzaClick = () => {
     setExibirModal(true)
   }
-  const getDescricao = (descricao: string) => {
-    if (descricao.length > 200) {
-      return descricao.slice(0, 159) + '...'
-    }
-    return descricao
-  }
+
+  // const getDescricao = (descricao: string) => {
+  //   if (descricao.length > 200) {
+  //     return descricao.slice(0, 159) + '...'
+  //   }
+  //   return descricao
+  // }
 
   return (
     <ContainerPerfil>
@@ -40,7 +41,7 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
         onClick={handleImagemPizzaClick}
       />
       <Pizza>{produto.nome}</Pizza>
-      <TextoPizza>{getDescricao(produto.descricao)}</TextoPizza>
+      <TextoPizza>{produto.descricao}</TextoPizza>
       <div>
         <ButtonSabiaMais onClick={handleAdicionarCarrinho}>
           Mais detalhes

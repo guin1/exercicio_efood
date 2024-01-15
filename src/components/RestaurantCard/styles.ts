@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-import { Buttonn } from '../Button/styles'
+// import { Buttonn } from '../Button/styles'
 
 export interface RestaurantCardProps {
   name: string
@@ -30,7 +30,7 @@ export const ButtonContain = styled.button`
   position: absolute;
   top: 28px;
   border: none;
-  left: 90%;
+  right: -190px;
   display: inline-block;
   margin-bottom: 10px;
   white-space: nowrap;
@@ -80,8 +80,16 @@ export const TituloText = styled.h3`
   }
 `
 
-export const ButtonItaliano = styled(Buttonn)`
+export const ButtonItaliano = styled.button`
   position: absolute;
   top: 28px;
-  left: 370px;
+  right: -280px;
+  padding: 8px 16px;
+  background-color: #e66767;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
 `

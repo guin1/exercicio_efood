@@ -36,7 +36,11 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => (
             <Buttonn>Destaque da semana</Buttonn>
           </ButtonContain>
         ) : null}
-        {restaurant.tipo && <ButtonItaliano>{restaurant.tipo}</ButtonItaliano>}
+        <div>
+          {restaurant.tipo && (
+            <ButtonItaliano>{restaurant.tipo}</ButtonItaliano>
+          )}
+        </div>
       </NavLink>
 
       <Text>{restaurant.descricao}</Text>
