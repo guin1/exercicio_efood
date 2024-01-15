@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-// import { Buttonn } from '../Button/styles'
 
 export interface RestaurantCardProps {
   name: string
@@ -11,9 +10,15 @@ export interface RestaurantCardProps {
 export const CardContainer = styled.div`
   position: relative;
   display: grid;
+  max-width: 472px;
   flex-direction: column;
   padding: 20px;
   width: 200px;
+
+  @media (max-width: 768px) {
+    width: 100px;
+    margin: 0 auto;
+  }
 `
 export const Borda = styled.div`
   padding: 1px 10px;
@@ -22,8 +27,11 @@ export const Borda = styled.div`
 
 export const ImgRestaurant = styled.img`
   width: 470px;
-  max-width: 472px;
   height: 217px;
+
+  @media (max-width: 768px) {
+    width: 300px;
+  }
 `
 
 export const ButtonContain = styled.button`
