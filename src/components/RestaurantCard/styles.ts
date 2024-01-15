@@ -16,12 +16,16 @@ export const CardContainer = styled.div`
   width: 200px;
 
   @media (max-width: 768px) {
-    width: 100px;
+    width: 85%;
   }
 `
 export const Borda = styled.div`
   padding: 1px 10px;
   border: 1px solid ${cores.rosa};
+
+  @media (max-width: 768px) {
+    width: 85%;
+  }
 `
 
 export const ImgRestaurant = styled.img`
@@ -29,7 +33,7 @@ export const ImgRestaurant = styled.img`
   height: 217px;
 
   @media (max-width: 768px) {
-    width: 300px;
+    width: 90%;
   }
 `
 

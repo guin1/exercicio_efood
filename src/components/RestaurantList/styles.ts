@@ -23,7 +23,6 @@ export const GridContainer = styled.div`
   justify-content: center;
 
   @media (max-width: 768px) {
-    display: block;
-    justify-content: center;
+    grid-template-columns: 1fr;
   }
 `
