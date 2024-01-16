@@ -24,5 +24,6 @@ export const GridContainer = styled.div`
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    margin-left: 50px;
   }
 `

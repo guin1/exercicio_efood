@@ -16,7 +16,7 @@ export const CardContainer = styled.div`
   width: 200px;
 
   @media (max-width: 768px) {
-    width: 85%;
+    width: 90%;
   }
 `
 export const Borda = styled.div`
@@ -33,7 +33,7 @@ export const ImgRestaurant = styled.img`
   height: 217px;
 
   @media (max-width: 768px) {
-    width: 90%;
+    width: 85%;
   }
 `
 

@@ -4,7 +4,8 @@ import {
   ImagemPizza,
   Pizza,
   TextoPizza,
-  ButtonSabiaMais
+  ButtonSabiaMais,
+  ButtonContainer
 } from './styles'
 import BarraLateral from '../BarraLateral'
 import Modal from '../ModalPizza'
@@ -42,11 +43,11 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
       />
       <Pizza>{produto.nome}</Pizza>
       <TextoPizza>{produto.descricao}</TextoPizza>
-      <div>
+      <ButtonContainer>
         <ButtonSabiaMais onClick={handleAdicionarCarrinho}>
           Mais detalhes
         </ButtonSabiaMais>
-      </div>
+      </ButtonContainer>
       {exibirBarraLateral && (
         <BarraLateral
           produto={{
