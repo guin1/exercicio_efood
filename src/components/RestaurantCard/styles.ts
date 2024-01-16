@@ -47,7 +47,7 @@ export const ButtonContain = styled.button`
   white-space: nowrap;
 
   @media (max-width: 768px) {
-    margin-right: 95%;
+    margin-right: 85%;
   }
 `
 export const ButtonSaibaMais = styled.button`
@@ -109,6 +109,6 @@ export const ButtonItaliano = styled.button`
   font-weight: 600;
 
   @media (max-width: 768px) {
-    margin-right: 95%;
+    margin-right: 85%;
   }
 `
