@@ -16,7 +16,7 @@ export const CardContainer = styled.div`
   width: 200px;
 
   @media (max-width: 768px) {
-    width: 90%;
+    width: 95%;
   }
 `
 export const Borda = styled.div`
@@ -24,7 +24,7 @@ export const Borda = styled.div`
   border: 1px solid ${cores.rosa};
 
   @media (max-width: 768px) {
-    width: 85%;
+    width: 95%;
   }
 `
 
@@ -33,7 +33,7 @@ export const ImgRestaurant = styled.img`
   height: 217px;
 
   @media (max-width: 768px) {
-    width: 85%;
+    width: 95%;
   }
 `
 
@@ -45,6 +45,10 @@ export const ButtonContain = styled.button`
   display: inline-block;
   margin-bottom: 10px;
   white-space: nowrap;
+
+  @media (max-width: 768px) {
+    margin-right: 95%;
+  }
 `
 export const ButtonSaibaMais = styled.button`
   margin-bottom: 10px;
@@ -103,4 +107,8 @@ export const ButtonItaliano = styled.button`
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    margin-right: 95%;
+  }
 `
