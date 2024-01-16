@@ -38,11 +38,11 @@ export const Excluir = styled.img`
 
 export const ModalContent = styled.div`
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
 `
 
 export const ModalImage = styled.img`
-  border-radius: 8px;
+  // border-radius: 8px;
   width: 280px;
   height: 280px;
 `
@@ -54,6 +54,7 @@ export const ModalText = styled.div`
 export const ModalTitle = styled.h3`
   font-size: 24px;
   margin-bottom: 10px;
+  margin-top: -15px;
   color: ${cores.branca};
 `
 
