@@ -37,7 +37,7 @@ export interface Produto {
 const Perfil: React.FC = () => {
   const { id } = useParams()
   const [cardapio, setCardapio] = useState<Produto[]>([])
-  const [apresentacao, setApresentacao] = useState<Restaurant | null>(null)
+  const [apresentacao, setApresentacao] = useState<Restaurant>()
 
   useEffect(() => {
     const fetchRestaurante = async () => {
@@ -50,17 +50,20 @@ const Perfil: React.FC = () => {
         setApresentacao(data)
         setCardapio(data.cardapio)
         localStorage.setItem('cardapio', JSON.stringify(data.cardapio))
+        localStorage.setItem('apresentacao', JSON.stringify(data)) // Armazena a apresentação
       } catch (error) {
         console.error('Erro ao carregar cardápio:', error)
       }
     }
 
     const storedCardapio = localStorage.getItem('cardapio')
+    const storedApresentacao = localStorage.getItem('apresentacao')
 
-    if (!storedCardapio) {
+    if (!storedCardapio || !storedApresentacao) {
       fetchRestaurante()
     } else {
       setCardapio(JSON.parse(storedCardapio))
+      setApresentacao(JSON.parse(storedApresentacao))
     }
   }, [id])
 
