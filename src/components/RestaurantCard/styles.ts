@@ -17,6 +17,7 @@ export const CardContainer = styled.div`
 
   @media (max-width: 768px) {
     width: 95%;
+    margin: auto;
   }
 `
 export const Borda = styled.div`

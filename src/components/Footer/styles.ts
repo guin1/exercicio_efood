@@ -22,6 +22,10 @@ export const FooterContainer = styled.div`
     margin: 5px;
     width: 88;
   }
+
+  @media (max-width: 768px) {
+    // width: 95%;
+  }
 `
 
 export const TextFooter = styled.p`
@@ -29,6 +33,10 @@ export const TextFooter = styled.p`
   margin-top: 100px;
   margin-bottom: 15px;
   font-size: 14px;
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `
 export const LogoContainer = styled.div`
   img {
