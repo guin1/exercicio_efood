@@ -29,9 +29,18 @@ export const TextoLaDolceVita = styled.h2`
   color: ${cores.branca};
 `
 export const ContainerTexto = styled.div`
-  width: 1024px;
+  // width: 1024px;
+
+  @media (max-width: 768px) {
+    max-width: 768px;
+    width: 768px;
+  }
 `
-export const ImageContainer = styled.div``
+export const ImageContainer = styled.div`
+  @media (max-width: 768px) {
+    width: 768px;
+  }
+`
 
 export const ImagemApresentacao = styled.img`
   position: relative;
@@ -47,4 +56,8 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: #000000cc;
+
+  @media (max-width: 768px) {
+    width: 768px;
+  }
 `

@@ -71,7 +71,6 @@ const Perfil: React.FC = () => {
     <>
       <HeaderPerfil />
       {apresentacao && <Apresentacao restaurantapre={apresentacao} />}
-
       {cardapio.length > 0 ? (
         <ProdutosList produtos={cardapio}>
           {cardapio.map((produto) => (

@@ -3,7 +3,12 @@ import { cores } from '../../styles'
 
 export const ContainerCor = styled.div`
   background-color: #ffebd9;
-  width: 100%;
+  // width: 100%;
+
+  @media (max-width: 768px) {
+    max-width: 768px;
+    width: 768px;
+  }
 `
 
 export const ContainerPerfil = styled.div`
@@ -13,9 +18,9 @@ export const ContainerPerfil = styled.div`
   height: 186px;
   position: relative;
   margin: auto;
-  width: 100%;
 
   @media (max-width: 768px) {
+    width: 550px;
   }
 `
 
