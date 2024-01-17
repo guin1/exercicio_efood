@@ -7,7 +7,7 @@ export const ContainerApresentacao = styled.div`
   margin: auto;
 `
 
-export const TextoItaliana = styled.p`
+export const TextoItaliana = styled.h3`
   position: absolute;
   width: 101px;
   height: 33px;
@@ -15,9 +15,10 @@ export const TextoItaliana = styled.p`
   color: ${cores.branca};
   font-weight: 100;
   font-size: 32px;
+  font-family: Roboto, sans-serif;
 `
 
-export const TextoLaDolceVita = styled.p`
+export const TextoLaDolceVita = styled.h2`
   position: absolute;
   width: 676px;
   height: 33px;
@@ -32,10 +33,7 @@ export const TextoLaDolceVita = styled.p`
 export const ContainerTexto = styled.div`
   width: 1024px;
 `
-export const ImageContainer = styled.div`
-  // background-color: #000000cc 50%;
-  // object-fit: cover;
-`
+export const ImageContainer = styled.div``
 
 export const ImagemApresentacao = styled.img`
   position: relative;
