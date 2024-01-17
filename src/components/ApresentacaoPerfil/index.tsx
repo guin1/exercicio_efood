@@ -3,7 +3,9 @@ import { Restaurant } from '../../pages/home'
 import {
   ContainerApresentacao,
   ContainerTexto,
+  ImageContainer,
   ImagemApresentacao,
+  Overlay,
   TextoItaliana,
   TextoLaDolceVita
 } from './styles'
@@ -17,10 +19,14 @@ const Apresentacao: React.FC<ApresentacaoProps> = ({ restaurantapre }) => {
     <ContainerApresentacao>
       {restaurantapre && (
         <>
-          <ImagemApresentacao
-            src={restaurantapre.capa}
-            alt={restaurantapre.titulo}
-          />
+          <ImageContainer>
+            <ImagemApresentacao
+              src={restaurantapre.capa}
+              alt={restaurantapre.titulo}
+            />
+            <Overlay />
+          </ImageContainer>
+
           <ContainerTexto className="container">
             <TextoItaliana>{restaurantapre.tipo}</TextoItaliana>
             <TextoLaDolceVita>{restaurantapre.titulo}</TextoLaDolceVita>
