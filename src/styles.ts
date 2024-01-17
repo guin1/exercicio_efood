@@ -23,7 +23,5 @@ export const GlobalCss = createGlobalStyle`
     max-width: 1024px;
     width: 100%;
     margin: 0 auto;
-
-
   }
 `

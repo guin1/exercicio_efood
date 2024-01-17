@@ -10,6 +10,10 @@ export const ContainerPerfil = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+
+  // @media (max-width: 768px) {
+  //   margin: 0 auto;
+  // }
 `
 export const Pizza = styled.h3`
   font-size: 16px;

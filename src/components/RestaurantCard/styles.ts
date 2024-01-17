@@ -17,7 +17,6 @@ export const CardContainer = styled.div`
 
   @media (max-width: 768px) {
     width: 95%;
-    margin: auto;
   }
 `
 export const Borda = styled.div`
@@ -26,6 +25,7 @@ export const Borda = styled.div`
 
   @media (max-width: 768px) {
     width: 95%;
+    margin: 0 auto;
   }
 `
 
@@ -35,6 +35,7 @@ export const ImgRestaurant = styled.img`
 
   @media (max-width: 768px) {
     width: 95%;
+    margin: 0 auto;
   }
 `
 

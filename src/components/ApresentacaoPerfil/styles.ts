@@ -6,6 +6,7 @@ export const ContainerApresentacao = styled.div`
   width: 100%;
   margin: auto;
   margin-bottom: 32px;
+  overflow-x: hidden;
 `
 
 export const TextoItaliana = styled.h3`
@@ -28,19 +29,8 @@ export const TextoLaDolceVita = styled.h2`
   font-size: 32px;
   color: ${cores.branca};
 `
-export const ContainerTexto = styled.div`
-  // width: 1024px;
-
-  @media (max-width: 768px) {
-    max-width: 768px;
-    width: 768px;
-  }
-`
-export const ImageContainer = styled.div`
-  @media (max-width: 768px) {
-    width: 768px;
-  }
-`
+export const ContainerTexto = styled.div``
+export const ImageContainer = styled.div``
 
 export const ImagemApresentacao = styled.img`
   position: relative;
@@ -56,8 +46,4 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: #000000cc;
-
-  @media (max-width: 768px) {
-    width: 768px;
-  }
 `
