@@ -5,6 +5,7 @@ import Apresentacao from '../components/ApresentacaoPerfil'
 import ProdutosList from '../components/ProdutosList'
 import ProdutosPerfilCard from '../components/ProdutosPerfilCard'
 import Footer from '../components/Footer'
+import { Restaurant } from './home'
 
 export interface ProdutosPerfilCardProps {
   produto: Produto
@@ -36,6 +37,7 @@ export interface Produto {
 const Perfil: React.FC = () => {
   const { id } = useParams()
   const [cardapio, setCardapio] = useState<Produto[]>([])
+  const [apresentacao, setApresentacao] = useState<Restaurant | null>(null)
 
   useEffect(() => {
     const fetchRestaurante = async () => {
@@ -45,6 +47,7 @@ const Perfil: React.FC = () => {
         )
         const data = await response.json()
 
+        setApresentacao(data)
         setCardapio(data.cardapio)
         localStorage.setItem('cardapio', JSON.stringify(data.cardapio))
       } catch (error) {
@@ -64,7 +67,7 @@ const Perfil: React.FC = () => {
   return (
     <div>
       <HeaderPerfil />
-      <Apresentacao />
+      {apresentacao && <Apresentacao restaurantapre={apresentacao} />}
       <div className="container">
         {cardapio.length > 0 ? (
           <ProdutosList produtos={cardapio}>

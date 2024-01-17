@@ -14,7 +14,7 @@ import {
 } from './styles'
 import { Buttonn } from '../Button/styles'
 
-interface RestaurantCardProps {
+export interface RestaurantCardProps {
   restaurant: Restaurant
 }
 
