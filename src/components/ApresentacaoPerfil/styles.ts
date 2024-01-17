@@ -38,6 +38,10 @@ export const ImagemApresentacao = styled.img`
   margin: auto;
   width: 100%;
   height: 300px;
+
+  @media (max-width: 768px) {
+    height: 150px;
+  }
 `
 export const Overlay = styled.div`
   position: absolute;

@@ -20,6 +20,10 @@ export const LeftSection = styled.div`
 
 export const CenterSection = styled.div`
   text-align: center;
+
+  @media (max-width: 768px) {
+    margin: 0 auto;
+  }
 `
 
 export const RightSection = styled.div`
