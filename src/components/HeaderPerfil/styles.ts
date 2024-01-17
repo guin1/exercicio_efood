@@ -3,6 +3,7 @@ import { cores } from '../../styles'
 
 export const ContainerCor = styled.div`
   background-color: #ffebd9;
+  width: 100%;
 `
 
 export const ContainerPerfil = styled.div`
@@ -12,20 +13,14 @@ export const ContainerPerfil = styled.div`
   height: 186px;
   position: relative;
   margin: auto;
+  width: 100%;
 
   @media (max-width: 768px) {
-    height: 108px;
-    width: 750px;
-    margin-bottom: 1px;
   }
 `
 
 export const LeftSection = styled.div`
   text-align: left;
-
-  @media (max-width: 768px) {
-    margin-left: 50px;
-  }
 `
 
 export const CenterSection = styled.div`

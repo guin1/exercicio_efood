@@ -5,6 +5,7 @@ export const ContainerApresentacao = styled.div`
   position: relative;
   width: 100%;
   margin: auto;
+  margin-bottom: 32px;
 `
 
 export const TextoItaliana = styled.h3`
@@ -26,9 +27,6 @@ export const TextoLaDolceVita = styled.h2`
   font-weight: 900;
   font-size: 32px;
   color: ${cores.branca};
-
-  media (max-width: 768px) {
-  }
 `
 export const ContainerTexto = styled.div`
   width: 1024px;
@@ -49,5 +47,4 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: #000000cc;
-  // z-index: 1;
 `

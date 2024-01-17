@@ -68,22 +68,21 @@ const Perfil: React.FC = () => {
   }, [id])
 
   return (
-    <div>
+    <>
       <HeaderPerfil />
       {apresentacao && <Apresentacao restaurantapre={apresentacao} />}
-      <div className="container">
-        {cardapio.length > 0 ? (
-          <ProdutosList produtos={cardapio}>
-            {cardapio.map((produto) => (
-              <ProdutosPerfilCard key={produto.id} produto={produto} />
-            ))}
-          </ProdutosList>
-        ) : (
-          <p>Cardápio não encontrado</p>
-        )}
-      </div>
+
+      {cardapio.length > 0 ? (
+        <ProdutosList produtos={cardapio}>
+          {cardapio.map((produto) => (
+            <ProdutosPerfilCard key={produto.id} produto={produto} />
+          ))}
+        </ProdutosList>
+      ) : (
+        <p>Cardápio não encontrado</p>
+      )}
       <Footer />
-    </div>
+    </>
   )
 }
 

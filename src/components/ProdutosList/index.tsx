@@ -11,7 +11,7 @@ export interface ProdutosListProps {
 
 const ProdutosList: React.FC<ProdutosListProps> = ({ produtos }) => (
   <>
-    <ListContainer>
+    <ListContainer className="container">
       {produtos.map((produto) => (
         <ProdutosPerfilCard
           key={produto.id}
