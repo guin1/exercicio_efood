@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   ContainerBarraLateral,
@@ -18,8 +18,6 @@ import {
 
 import lixeira from '../../assets/images/lixeira.png'
 
-// import miniPizza from '../../assets/images/mini_pizza.png'
-
 import EntregaForm from './Entrega'
 import PagamentoForm from './Pagamento'
 import PedidoConcluido from './PedidoConcluido'
@@ -29,15 +27,16 @@ import {
   handleInputChange,
   submitInputs,
   pedidoConcluidoClose,
-  removerDoCarrinho
+  removerDoCarrinho,
+  ProdutoNoCarrinho
 } from '../../store/reducers/cart'
 
 interface BarraLateralProps {
   produto: {
-    capa: string
-    titulo: string
-    preco: number
     id: number
+    capa: string
+    nome: string
+    preco: number
   }
   onClose: () => void
 }
@@ -52,7 +51,10 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
     input6: '',
     numeroCartao: ''
   })
-  const { itensNoCarrinho } = useSelector((state: RootState) => state.cart)
+
+  const itensNoCarrinho: ProdutoNoCarrinho[] = useSelector(
+    (state: RootState) => state.cart.itensNoCarrinho
+  )
 
   const dispatch = useDispatch()
   const { showInputs, showPagamentoInput, pedidoConcluido } = useSelector(
@@ -86,6 +88,8 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
     dispatch(pedidoConcluidoClose())
     onClose()
   }
+
+  console.log('itensNoCarrinho:', itensNoCarrinho)
   return (
     <ContainerBarraLateral>
       {showInputs ? (
@@ -107,18 +111,18 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
       ) : (
         <div>
           <ul>
-            {itensNoCarrinho.map((item) => (
-              <CardBarra key={item.id}>
-                <MiniPizzaImage src={item.capa} alt={item.capa} />
+            {itensNoCarrinho.map((produto) => (
+              <CardBarra key={produto.id}>
+                <MiniPizzaImage src={produto.capa} alt={produto.capa} />
                 <InfoContainer>
-                  <ProdutoNome>{item.titulo}</ProdutoNome>
-                  <PrecoProduto>R$ {item.preco}</PrecoProduto>
+                  <ProdutoNome>{produto.nome}</ProdutoNome>
+                  <PrecoProduto>R$ {produto.preco}</PrecoProduto>
+                  <LixeiraImage
+                    src={lixeira}
+                    alt="lixeira"
+                    onClick={() => removerProduto(produto.id)}
+                  />
                 </InfoContainer>
-                <LixeiraImage
-                  src={lixeira}
-                  alt="lixeira"
-                  onClick={() => removerProduto(item.id)}
-                />
               </CardBarra>
             ))}
           </ul>
@@ -128,7 +132,11 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
             <ValorTotal>Valor Total:</ValorTotal>
             <PrecoTotal>
               R${' '}
-              {itensNoCarrinho.reduce((total, item) => total + item.preco, 0)}
+              {itensNoCarrinho.reduce(
+                (total, produto: ProdutoNoCarrinho) =>
+                  total + Number(produto.preco),
+                0
+              )}
             </PrecoTotal>
           </ContainerPreco>
           <ContainerButton>

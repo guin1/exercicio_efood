@@ -27,13 +27,6 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
     setExibirModal(true)
   }
 
-  // const getDescricao = (descricao: string) => {
-  //   if (descricao.length > 200) {
-  //     return descricao.slice(0, 159) + '...'
-  //   }
-  //   return descricao
-  // }
-
   return (
     <ContainerPerfil>
       <ImagemPizza
@@ -53,15 +46,18 @@ const ProdutosPerfilCard: React.FC<ProdutosPerfilCardProps> = ({ produto }) => {
           produto={{
             id: produto.id,
             capa: produto.foto,
-            titulo: produto.titulo,
-            preco: produto.cardapio[0].preco
+            nome: produto.nome,
+            preco: produto.preco
           }}
           onClose={handleCloseBarraLateral}
         />
       )}
       {exibirModal && (
         <Modal
-          onClose={() => setExibirModal(false)}
+          onClose={() => {
+            setExibirModal(false)
+            setExibirBarraLateral(true)
+          }}
           showSidebar={() => setExibirBarraLateral(true)}
           produto={produto}
         />

@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { adicionarAoCarrinho } from '../../store/reducers/cart'
 
@@ -17,6 +17,7 @@ import {
 import excluir from '../../assets/images/excluir.png'
 import { Produto } from '../../pages/perfil'
 import ProdutosPerfilCard from '../ProdutosPerfilCard'
+import { RootState } from '../../store'
 
 export interface ModalProps {
   onClose: () => void
@@ -26,24 +27,31 @@ export interface ModalProps {
 
 const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
   const dispatch = useDispatch()
+  const itensNoCarrinho = useSelector(
+    (state: RootState) => state.cart.itensNoCarrinho
+  )
 
   const handleClickAdicionarAoCarrinho = () => {
-    if (produto.cardapio && produto.cardapio.length > 0) {
+    {
+      console.log('Produto ao adicionar ao carrinho:', produto)
+
       dispatch(
         adicionarAoCarrinho({
           id: produto.id,
           capa: produto.foto,
-          titulo: produto.titulo,
+          nome: produto.nome,
           preco: produto.preco
         })
       )
+
+      console.log('Estado após adicionar ao carrinho:', itensNoCarrinho)
 
       onClose()
     }
   }
 
   const primeiroItemCardapio =
-    produto.cardapio && produto.cardapio.length > 0 ? produto.cardapio[0] : null
+    produto.cardapio && produto.cardapio.length > 1 ? produto.cardapio[1] : null
 
   return (
     <>
@@ -72,8 +80,8 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
             <ModalCloseButton
               onClick={() => {
                 onClose()
-                showSidebar()
                 handleClickAdicionarAoCarrinho()
+                showSidebar()
               }}
             >
               Adicionar ao carrinho - R$ {produto.preco}

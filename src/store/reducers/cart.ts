@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type ProdutoNoCarrinho = {
+export type ProdutoNoCarrinho = {
   id: number
   capa: string
-  titulo: string
+  nome: string
   preco: number
 }
 
@@ -106,20 +106,19 @@ const cartSlice = createSlice({
       }
     },
     adicionarAoCarrinho: (state, action: PayloadAction<ProdutoNoCarrinho>) => {
-      const { id, capa, titulo, preco } = action.payload
-
+      const { id } = action.payload
       const produtoExistente = state.itensNoCarrinho.find(
-        (item) => item.id === id
+        (produto) => produto.id === id
       )
 
       if (!produtoExistente) {
-        state.itensNoCarrinho.push({ id, capa, titulo, preco })
+        state.itensNoCarrinho.push(action.payload)
       }
     },
     removerDoCarrinho: (state, action: PayloadAction<number>) => {
       const id = action.payload
       state.itensNoCarrinho = state.itensNoCarrinho.filter(
-        (item) => item.id !== id
+        (produto) => produto.id !== id
       )
     }
   }

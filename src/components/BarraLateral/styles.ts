@@ -10,12 +10,8 @@ export const ContainerBarraLateral = styled.div`
   right: 0;
   padding: 20px;
   color: ${cores.branca};
-
-  @media (max-width: 768px) {
-    width: 330px;
-  }
 `
-export const CardBarra = styled.li`
+export const CardBarra = styled.div`
   display: flex;
   background-color: ${cores.branca};
   width: 300px;
@@ -25,6 +21,7 @@ export const CardBarra = styled.li`
 
 export const MiniPizzaImage = styled.img`
   margin: 8px;
+  postion: relative;
   max-height: 80px;
   height: 80px;
   max-width: 80px;

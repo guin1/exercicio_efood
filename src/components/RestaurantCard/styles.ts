@@ -39,7 +39,7 @@ export const ImgRestaurant = styled.img`
   }
 `
 
-export const ButtonContain = styled.button`
+export const ButtonContain = styled.div`
   position: absolute;
   top: 28px;
   border: none;
