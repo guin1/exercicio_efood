@@ -16,8 +16,8 @@ export const ContainerModal = styled.div`
   z-index: 2;
 
   @media (max-width: 768px) {
-    height: 450px;
-    width: 700px;
+    width: 80%;
+    height: 60%;
   }
 `
 export const ContainerOverlay = styled.div`
@@ -38,13 +38,19 @@ export const Excluir = styled.img`
 
 export const ModalContent = styled.div`
   display: flex;
-  // justify-content: space-between;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 `
 
 export const ModalImage = styled.img`
-  // border-radius: 8px;
   width: 280px;
   height: 280px;
+
+  @media (max-width: 768px) {
+    height: 140px;
+  }
 `
 
 export const ModalText = styled.div`
@@ -56,12 +62,21 @@ export const ModalTitle = styled.h3`
   margin-bottom: 10px;
   margin-top: -15px;
   color: ${cores.branca};
+
+  @media (max-width: 768px) {
+    width: 80%;
+    font-size: 18px;
+  }
 `
 
 export const ModalDescription = styled.p`
   font-size: 14px;
   line-height: 1.4;
   color: ${cores.branca};
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `
 
 export const ModalCloseButton = styled.button`
@@ -73,4 +88,8 @@ export const ModalCloseButton = styled.button`
   padding: 4px;
   margin-top: 35px;
   cursor: pointer;
+  margin-bottom: 15px;
+`
+export const Prato = styled.p`
+  color: ${cores.branca};
 `

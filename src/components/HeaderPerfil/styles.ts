@@ -12,6 +12,10 @@ export const ContainerPerfil = styled.div`
   height: 186px;
   position: relative;
   margin: auto;
+
+  @media (max-width: 768px) {
+    width: 92%;
+  }
 `
 
 export const LeftSection = styled.div`
@@ -34,4 +38,11 @@ export const LogoTexto = styled.p`
   color: ${cores.rosa};
   font-size: 18px;
   margin-right: 10px;
+`
+export const LogoTextoButoon = styled.button`
+  color: ${cores.rosa};
+  font-size: 18px;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
 `

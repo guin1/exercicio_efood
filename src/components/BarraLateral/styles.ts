@@ -4,12 +4,18 @@ import { cores } from '../../styles'
 export const ContainerBarraLateral = styled.div`
   width: 344px;
   height: 100vh;
+  overflow-y: auto;
   background-color: ${cores.rosa};
   position: fixed;
   top: 0;
   right: 0;
   padding: 20px;
   color: ${cores.branca};
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    width: 72%;
+  }
 `
 export const CardBarra = styled.div`
   display: flex;
@@ -17,6 +23,10 @@ export const CardBarra = styled.div`
   width: 300px;
   color: ${cores.rosa};
   margin-bottom: 5px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 export const MiniPizzaImage = styled.img`
@@ -35,13 +45,6 @@ export const LixeiraImage = styled.img`
   margin-top: 70px;
   position: absolute;
   cursor: pointer;
-
-  @media (max-width: 768px) {
-    width: 16px;
-    height: 16px;
-    right: 15px;
-    margin-top: 70px;
-  }
 `
 
 export const InfoContainer = styled.div`
@@ -56,6 +59,10 @@ export const ProdutoNome = styled.h4`
   color: ${cores.rosa};
   margin-top: 8px;
   margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `
 
 export const PrecoProduto = styled.p`
@@ -71,6 +78,10 @@ export const ContainerPreco = styled.div`
   width: 100%;
   margin-top: 20px;
   font-size: 14px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 export const ValorTotal = styled.h3`
   margin: 0;
@@ -93,6 +104,10 @@ export const ButtonEntrega = styled.button`
   width: 300px;
   height: 24px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 export const QuantidadePizza = styled.span`
   font-family: Roboto;

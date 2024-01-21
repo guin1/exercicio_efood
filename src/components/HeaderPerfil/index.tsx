@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
-
 import logo from '../../assets/images/logo.png'
 import {
   CenterSection,
@@ -9,11 +8,19 @@ import {
   RightSection,
   LogoTexto,
   ContainerPerfil,
-  ContainerCor
+  ContainerCor,
+  LogoTextoButoon
 } from './styles'
+import { useState } from 'react'
+import BarraLateral from '../BarraLateral'
 
 const HeaderPerfil = () => {
-  const { produtosNoCarrinho } = useSelector((state: RootState) => state.cart)
+  const { itensNoCarrinho } = useSelector((state: RootState) => state.cart)
+  const [exibirBarraLateralBotao, setExibirBarraLateralBotao] = useState(false)
+
+  const handleOpenBarraLateralBotao = () => {
+    setExibirBarraLateralBotao(true)
+  }
 
   return (
     <ContainerCor>
@@ -22,14 +29,28 @@ const HeaderPerfil = () => {
           <LogoTexto>Restaurantes</LogoTexto>
         </LeftSection>
         <CenterSection>
-          <NavLink to="/">
+          <NavLink to="/" onClick={() => setExibirBarraLateralBotao(false)}>
             <img src={logo} alt="Efood" />
           </NavLink>
         </CenterSection>
         <RightSection>
-          <LogoTexto>{`${produtosNoCarrinho} produto(s) no carrinho`}</LogoTexto>
+          <LogoTextoButoon onClick={handleOpenBarraLateralBotao}>
+            {`${itensNoCarrinho.length} produto(s) no carrinho`}
+          </LogoTextoButoon>
         </RightSection>
       </ContainerPerfil>
+
+      {exibirBarraLateralBotao && (
+        <BarraLateral
+          onClose={() => setExibirBarraLateralBotao(false)}
+          produto={{
+            id: 0,
+            capa: '',
+            nome: '',
+            preco: 0
+          }}
+        />
+      )}
     </ContainerCor>
   )
 }

@@ -1,7 +1,6 @@
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { adicionarAoCarrinho } from '../../store/reducers/cart'
-
 import {
   ContainerModal,
   ContainerOverlay,
@@ -11,19 +10,13 @@ import {
   ModalDescription,
   ModalImage,
   ModalText,
-  ModalTitle
+  ModalTitle,
+  Prato
 } from './styles'
-
 import excluir from '../../assets/images/excluir.png'
-import { Produto } from '../../pages/perfil'
+import { ModalProps } from '../../pages/perfil'
 import ProdutosPerfilCard from '../ProdutosPerfilCard'
 import { RootState } from '../../store'
-
-export interface ModalProps {
-  onClose: () => void
-  showSidebar: () => void
-  produto: Produto
-}
 
 const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
   const dispatch = useDispatch()
@@ -31,10 +24,17 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
     (state: RootState) => state.cart.itensNoCarrinho
   )
 
-  const handleClickAdicionarAoCarrinho = () => {
-    {
-      console.log('Produto ao adicionar ao carrinho:', produto)
+  const [mensagemProdutoJaNoCarrinho, setMensagemProdutoJaNoCarrinho] =
+    useState(false)
 
+  const handleClickAdicionarAoCarrinho = () => {
+    const produtoExistente = itensNoCarrinho.find(
+      (produtoNoCarrinho) => produtoNoCarrinho.id === produto.id
+    )
+
+    if (produtoExistente) {
+      setMensagemProdutoJaNoCarrinho(true)
+    } else {
       dispatch(
         adicionarAoCarrinho({
           id: produto.id,
@@ -45,7 +45,6 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
       )
 
       console.log('Estado após adicionar ao carrinho:', itensNoCarrinho)
-
       onClose()
     }
   }
@@ -55,11 +54,7 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
 
   return (
     <>
-      <ContainerOverlay
-        onClick={() => {
-          onClose()
-        }}
-      />
+      <ContainerOverlay onClick={() => onClose()} />
       <ContainerModal>
         <ModalContent>
           <ModalImage src={produto.foto} alt={produto.foto} />
@@ -79,13 +74,15 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
             </ModalDescription>
             <ModalCloseButton
               onClick={() => {
-                onClose()
                 handleClickAdicionarAoCarrinho()
                 showSidebar()
               }}
             >
               Adicionar ao carrinho - R$ {produto.preco}
             </ModalCloseButton>
+            {mensagemProdutoJaNoCarrinho && (
+              <Prato>Prato já foi selecionado !!!</Prato>
+            )}
           </ModalText>
         </ModalContent>
       </ContainerModal>

@@ -7,6 +7,12 @@ import ProdutosPerfilCard from '../components/ProdutosPerfilCard'
 import Footer from '../components/Footer'
 import { Restaurant } from './home'
 
+export interface ModalProps {
+  onClose: () => void
+  showSidebar: () => void
+  produto: Produto
+}
+
 export interface ProdutosPerfilCardProps {
   produto: Produto
 }

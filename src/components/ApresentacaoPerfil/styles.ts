@@ -18,6 +18,10 @@ export const TextoItaliana = styled.h3`
   font-weight: 100;
   font-size: 32px;
   font-family: Roboto, sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 26px;
+  }
 `
 
 export const TextoLaDolceVita = styled.h2`
@@ -28,8 +32,16 @@ export const TextoLaDolceVita = styled.h2`
   font-weight: 900;
   font-size: 32px;
   color: ${cores.branca};
+
+  @media (max-width: 768px) {
+    font-size: 26px;
+  }
 `
-export const ContainerTexto = styled.div``
+export const ContainerTexto = styled.div`
+  @media (max-width: 768px) {
+    width: 92%;
+  }
+`
 export const ImageContainer = styled.div``
 
 export const ImagemApresentacao = styled.img`
