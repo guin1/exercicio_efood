@@ -45,4 +45,5 @@ export const LogoTextoButoon = styled.button`
   margin-right: 10px;
   border: none;
   cursor: pointer;
+  background-color: #ffebd9;
 `

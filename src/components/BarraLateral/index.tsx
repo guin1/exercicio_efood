@@ -30,6 +30,7 @@ import {
   removerDoCarrinho,
   ProdutoNoCarrinho
 } from '../../store/reducers/cart'
+import { ContainerOverlay } from '../ModalPizza/styles'
 
 interface BarraLateralProps {
   produto: {
@@ -91,70 +92,73 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
 
   console.log('itensNoCarrinho:', itensNoCarrinho)
   return (
-    <ContainerBarraLateral>
-      {showInputs ? (
-        <EntregaForm
-          inputValues={inputValues}
-          handleInputChange={handleInputChangeLocal}
-          handleContinuarClick={handleContinuarClickLocal}
-          submterINputs={submitInputsLocal}
-        />
-      ) : showPagamentoInput ? (
-        <PagamentoForm
-          inputValues={inputValues}
-          handleInputChange={handleInputChangeLocal}
-          handleContinuarClick={handleContinuarClickLocal}
-          submterINputs={submitInputsLocal}
-        />
-      ) : pedidoConcluido ? (
-        <PedidoConcluido onClose={pedidoConcluidoCloseLocal} />
-      ) : (
-        <div>
-          {itensNoCarrinho.length === 0 ? (
-            <h2>Carrinho vazio</h2>
-          ) : (
-            <>
-              <ul>
-                {itensNoCarrinho.map((produto) => (
-                  <CardBarra key={produto.id}>
-                    <MiniPizzaImage src={produto.capa} alt={produto.capa} />
-                    <InfoContainer>
-                      <ProdutoNome>{produto.nome}</ProdutoNome>
-                      <PrecoProduto>R$ {produto.preco}</PrecoProduto>
-                      <LixeiraImage
-                        src={lixeira}
-                        alt="lixeira"
-                        onClick={() => removerProduto(produto.id)}
-                      />
-                    </InfoContainer>
-                  </CardBarra>
-                ))}
-              </ul>
+    <>
+      <ContainerOverlay onClick={() => onClose()} />
+      <ContainerBarraLateral>
+        {showInputs ? (
+          <EntregaForm
+            inputValues={inputValues}
+            handleInputChange={handleInputChangeLocal}
+            handleContinuarClick={handleContinuarClickLocal}
+            submterINputs={submitInputsLocal}
+          />
+        ) : showPagamentoInput ? (
+          <PagamentoForm
+            inputValues={inputValues}
+            handleInputChange={handleInputChangeLocal}
+            handleContinuarClick={handleContinuarClickLocal}
+            submterINputs={submitInputsLocal}
+          />
+        ) : pedidoConcluido ? (
+          <PedidoConcluido onClose={pedidoConcluidoCloseLocal} />
+        ) : (
+          <div>
+            {itensNoCarrinho.length === 0 ? (
+              <h2>Carrinho vazio</h2>
+            ) : (
+              <>
+                <ul>
+                  {itensNoCarrinho.map((produto) => (
+                    <CardBarra key={produto.id}>
+                      <MiniPizzaImage src={produto.capa} alt={produto.capa} />
+                      <InfoContainer>
+                        <ProdutoNome>{produto.nome}</ProdutoNome>
+                        <PrecoProduto>R$ {produto.preco}</PrecoProduto>
+                        <LixeiraImage
+                          src={lixeira}
+                          alt="lixeira"
+                          onClick={() => removerProduto(produto.id)}
+                        />
+                      </InfoContainer>
+                    </CardBarra>
+                  ))}
+                </ul>
 
-              {/* Conteúdo antes de clicar no botão */}
-              <ContainerPreco>
-                <ValorTotal>Valor Total:</ValorTotal>
-                <PrecoTotal>
-                  R${' '}
-                  {itensNoCarrinho
-                    .reduce(
-                      (total, produto: ProdutoNoCarrinho) =>
-                        total + Number(produto.preco),
-                      0
-                    )
-                    .toFixed(2)}{' '}
-                </PrecoTotal>
-              </ContainerPreco>
-              <ContainerButton>
-                <ButtonEntrega onClick={handleContinuarClickLocal}>
-                  Continuar com a entrega
-                </ButtonEntrega>
-              </ContainerButton>
-            </>
-          )}
-        </div>
-      )}
-    </ContainerBarraLateral>
+                {/* Conteúdo antes de clicar no botão */}
+                <ContainerPreco>
+                  <ValorTotal>Valor Total:</ValorTotal>
+                  <PrecoTotal>
+                    R${' '}
+                    {itensNoCarrinho
+                      .reduce(
+                        (total, produto: ProdutoNoCarrinho) =>
+                          total + Number(produto.preco),
+                        0
+                      )
+                      .toFixed(2)}{' '}
+                  </PrecoTotal>
+                </ContainerPreco>
+                <ContainerButton>
+                  <ButtonEntrega onClick={handleContinuarClickLocal}>
+                    Continuar com a entrega
+                  </ButtonEntrega>
+                </ContainerButton>
+              </>
+            )}
+          </div>
+        )}
+      </ContainerBarraLateral>
+    </>
   )
 }
 
