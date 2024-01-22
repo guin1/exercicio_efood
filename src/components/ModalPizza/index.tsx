@@ -39,7 +39,6 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
       dispatch(removerDoCarrinho(produto.id))
     }
 
-    // Fecha o modal após a exclusão
     onClose()
   }
 
@@ -59,8 +58,6 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
           preco: produto.preco
         })
       )
-
-      // Fecha o modal após adicionar ao carrinho
       onClose()
     }
   }
