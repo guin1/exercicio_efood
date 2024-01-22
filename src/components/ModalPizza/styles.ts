@@ -16,8 +16,8 @@ export const ContainerModal = styled.div`
   z-index: 2;
 
   @media (max-width: 768px) {
-    width: 80%;
-    height: 60%;
+    max-width: 80%;
+    height: 500px;
   }
 `
 export const ContainerOverlay = styled.div`
@@ -49,7 +49,9 @@ export const ModalImage = styled.img`
   height: 280px;
 
   @media (max-width: 768px) {
-    height: 140px;
+    height: 130px;
+    width: 220px;
+    margin-left: 15px;
   }
 `
 

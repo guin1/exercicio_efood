@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { adicionarAoCarrinho } from '../../store/reducers/cart'
+import {
+  adicionarAoCarrinho,
+  removerDoCarrinho
+} from '../../store/reducers/cart'
 import {
   ContainerModal,
   ContainerOverlay,
@@ -27,6 +30,19 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
   const [mensagemProdutoJaNoCarrinho, setMensagemProdutoJaNoCarrinho] =
     useState(false)
 
+  const handleExcluir = () => {
+    const produtoExistente = itensNoCarrinho.find(
+      (produtoNoCarrinho) => produtoNoCarrinho.id === produto.id
+    )
+
+    if (produtoExistente) {
+      dispatch(removerDoCarrinho(produto.id))
+    }
+
+    // Fecha o modal após a exclusão
+    onClose()
+  }
+
   const handleClickAdicionarAoCarrinho = () => {
     const produtoExistente = itensNoCarrinho.find(
       (produtoNoCarrinho) => produtoNoCarrinho.id === produto.id
@@ -44,17 +60,17 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
         })
       )
 
-      console.log('Estado após adicionar ao carrinho:', itensNoCarrinho)
+      // Fecha o modal após adicionar ao carrinho
       onClose()
     }
   }
 
   const primeiroItemCardapio =
-    produto.cardapio && produto.cardapio.length > 1 ? produto.cardapio[1] : null
+    produto.cardapio && produto.cardapio.length > 0 ? produto.cardapio[0] : null
 
   return (
     <>
-      <ContainerOverlay onClick={() => onClose()} />
+      <ContainerOverlay onClick={onClose} />
       <ContainerModal>
         <ModalContent>
           <ModalImage src={produto.foto} alt={produto.foto} />
@@ -64,7 +80,8 @@ const Modal = ({ showSidebar, onClose, produto }: ModalProps) => {
             />
           )}
           <ModalText>
-            <Excluir src={excluir} alt="excluir" onClick={onClose} />{' '}
+            <Excluir src={excluir} alt="excluir" onClick={handleExcluir} />
+
             <ModalTitle>
               <b>{produto.nome}</b>
             </ModalTitle>
