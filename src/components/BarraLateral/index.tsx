@@ -100,7 +100,7 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
 
   return (
     <>
-      <ContainerOverlay onClick={() => onClose()} />
+      <ContainerOverlay onClick={onClose} />
       <ContainerBarraLateral>
         {showInputs ? (
           <EntregaForm
