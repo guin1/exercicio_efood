@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { ReactNode, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
 import {
   ContainerBarraLateral,
   ContainerButton,
@@ -15,22 +13,12 @@ import {
   CardBarra,
   InfoContainer
 } from './styles'
-
 import lixeira from '../../assets/images/lixeira.png'
-
-import EntregaForm from './Entrega'
-import PagamentoForm from './Pagamento'
-import PedidoConcluido from './PedidoConcluido'
 import { RootState } from '../../store'
-import {
-  handleContinuarClick,
-  handleInputChange,
-  submitInputs,
-  pedidoConcluidoClose,
-  removerDoCarrinho,
-  ProdutoNoCarrinho
-} from '../../store/reducers/cart'
+import { removerDoCarrinho, ProdutoNoCarrinho } from '../../store/reducers/cart'
 import { ContainerOverlay } from '../ModalPizza/styles'
+import { useDispatch, useSelector } from 'react-redux'
+import EntregaForm from './Entrega'
 
 interface BarraLateralProps {
   produto: {
@@ -42,52 +30,19 @@ interface BarraLateralProps {
   onClose: () => void
 }
 
-const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
-  const [inputValues, setInputValues] = useState({
-    input1: '',
-    input2: '',
-    input3: '',
-    input4: '',
-    input5: '',
-    input6: '',
-    numeroCartao: ''
-  })
-
+const BarraLateral: React.FC<BarraLateralProps> = ({ onClose }) => {
+  const [mostrarEntregaForm, setMostrarEntregaForm] = useState(false) // Adicionando o estado local
   const itensNoCarrinho: ProdutoNoCarrinho[] = useSelector(
     (state: RootState) => state.cart.itensNoCarrinho
   )
-
   const dispatch = useDispatch()
-  const { showInputs, showPagamentoInput, pedidoConcluido } = useSelector(
-    (state: RootState) => state.cart
-  )
-
-  const handleInputChangeLocal = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    inputName: string
-  ) => {
-    setInputValues((prevValues) => ({
-      ...prevValues,
-      [inputName]: e.target.value
-    }))
-    dispatch(handleInputChange({ inputName, value: e.target.value }))
-  }
-
-  const handleContinuarClickLocal = () => {
-    dispatch(handleContinuarClick())
-  }
-
-  const submitInputsLocal = () => {
-    dispatch(submitInputs())
-  }
 
   const removerProduto = (item: number) => {
     dispatch(removerDoCarrinho(item))
   }
 
-  const pedidoConcluidoCloseLocal = () => {
-    dispatch(pedidoConcluidoClose())
-    onClose()
+  const handleContinuarEntrega = () => {
+    setMostrarEntregaForm(true) // Atualizando o estado para mostrar o componente EntregaForm
   }
 
   const deveRenderizarBarraLateral = () => {
@@ -97,67 +52,60 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ produto, onClose }) => {
   if (!deveRenderizarBarraLateral()) {
     return null
   }
+  const handleVoltarBarraLateral = () => {
+    setMostrarEntregaForm(false)
+  }
 
   return (
     <>
       <ContainerOverlay onClick={onClose} />
       <ContainerBarraLateral>
-        {showInputs ? (
-          <EntregaForm
-            inputValues={inputValues}
-            handleInputChange={handleInputChangeLocal}
-            handleContinuarClick={handleContinuarClickLocal}
-            submterINputs={submitInputsLocal}
-          />
-        ) : showPagamentoInput ? (
-          <PagamentoForm
-            inputValues={inputValues}
-            handleInputChange={handleInputChangeLocal}
-            handleContinuarClick={handleContinuarClickLocal}
-            submterINputs={submitInputsLocal}
-          />
-        ) : pedidoConcluido ? (
-          <PedidoConcluido onClose={pedidoConcluidoCloseLocal} />
-        ) : (
+        <div>
           <div>
-            <ul>
-              {itensNoCarrinho.map((produto) => (
-                <CardBarra key={produto.id}>
-                  <MiniPizzaImage src={produto.capa} alt={produto.capa} />
-                  <InfoContainer>
-                    <ProdutoNome>{produto.nome}</ProdutoNome>
-                    <PrecoProduto>R$ {produto.preco}</PrecoProduto>
-                    <LixeiraImage
-                      src={lixeira}
-                      alt="lixeira"
-                      onClick={() => removerProduto(produto.id)}
-                    />
-                  </InfoContainer>
-                </CardBarra>
-              ))}
-            </ul>
+            {/* Renderizando EntregaForm se o estado mostrarEntregaForm for verdadeiro */}
+            {mostrarEntregaForm ? (
+              <EntregaForm onVoltarBarraLateral={handleVoltarBarraLateral} />
+            ) : (
+              <>
+                <ul>
+                  {itensNoCarrinho.map((produto) => (
+                    <CardBarra key={produto.id}>
+                      <MiniPizzaImage src={produto.capa} alt={produto.capa} />
+                      <InfoContainer>
+                        <ProdutoNome>{produto.nome}</ProdutoNome>
+                        <PrecoProduto>R$ {produto.preco}</PrecoProduto>
+                        <LixeiraImage
+                          src={lixeira}
+                          alt="lixeira"
+                          onClick={() => removerProduto(produto.id)}
+                        />
+                      </InfoContainer>
+                    </CardBarra>
+                  ))}
+                </ul>
 
-            {/* Conteúdo antes de clicar no botão */}
-            <ContainerPreco>
-              <ValorTotal>Valor Total:</ValorTotal>
-              <PrecoTotal>
-                R${' '}
-                {itensNoCarrinho
-                  .reduce(
-                    (total, produto: ProdutoNoCarrinho) =>
-                      total + Number(produto.preco),
-                    0
-                  )
-                  .toFixed(2)}{' '}
-              </PrecoTotal>
-            </ContainerPreco>
-            <ContainerButton>
-              <ButtonEntrega onClick={handleContinuarClickLocal}>
-                Continuar com a entrega
-              </ButtonEntrega>
-            </ContainerButton>
+                <ContainerPreco>
+                  <ValorTotal>Valor Total:</ValorTotal>
+                  <PrecoTotal>
+                    R${' '}
+                    {itensNoCarrinho
+                      .reduce(
+                        (total, produto: ProdutoNoCarrinho) =>
+                          total + Number(produto.preco),
+                        0
+                      )
+                      .toFixed(2)}{' '}
+                  </PrecoTotal>
+                </ContainerPreco>
+                <ContainerButton>
+                  <ButtonEntrega onClick={handleContinuarEntrega}>
+                    Continuar com a entrega
+                  </ButtonEntrega>
+                </ContainerButton>
+              </>
+            )}
           </div>
-        )}
+        </div>
       </ContainerBarraLateral>
     </>
   )
