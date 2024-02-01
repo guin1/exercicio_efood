@@ -31,7 +31,7 @@ interface BarraLateralProps {
 }
 
 const BarraLateral: React.FC<BarraLateralProps> = ({ onClose }) => {
-  const [mostrarEntregaForm, setMostrarEntregaForm] = useState(false) // Adicionando o estado local
+  const [mostrarEntregaForm, setMostrarEntregaForm] = useState(false)
   const itensNoCarrinho: ProdutoNoCarrinho[] = useSelector(
     (state: RootState) => state.cart.itensNoCarrinho
   )
@@ -42,18 +42,19 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ onClose }) => {
   }
 
   const handleContinuarEntrega = () => {
-    setMostrarEntregaForm(true) // Atualizando o estado para mostrar o componente EntregaForm
+    setMostrarEntregaForm(true)
   }
 
   const deveRenderizarBarraLateral = () => {
     return itensNoCarrinho.length > 0
   }
 
-  if (!deveRenderizarBarraLateral()) {
-    return null
-  }
   const handleVoltarBarraLateral = () => {
     setMostrarEntregaForm(false)
+  }
+
+  if (!deveRenderizarBarraLateral()) {
+    return null
   }
 
   return (
@@ -62,9 +63,11 @@ const BarraLateral: React.FC<BarraLateralProps> = ({ onClose }) => {
       <ContainerBarraLateral>
         <div>
           <div>
-            {/* Renderizando EntregaForm se o estado mostrarEntregaForm for verdadeiro */}
             {mostrarEntregaForm ? (
-              <EntregaForm onVoltarBarraLateral={handleVoltarBarraLateral} />
+              <EntregaForm
+                onVoltarBarraLateral={handleVoltarBarraLateral}
+                itensNoCarrinho={itensNoCarrinho}
+              />
             ) : (
               <>
                 <ul>
