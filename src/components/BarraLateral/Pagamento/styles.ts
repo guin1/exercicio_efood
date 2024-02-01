@@ -16,11 +16,19 @@ export const InputCartao = styled.input`
   width: 200px;
   border: none;
   height: 24px;
+
+  @media (max-width: 768px) {
+    width: 150px;
+  }
 `
 export const InputVct = styled.input`
   width: 140px;
   border: none;
   height: 24px;
+
+  @media (max-width: 768px) {
+    width: 100px;
+  }
 `
 export const InputAnoVct = styled.input`
   width: 130px;
@@ -28,6 +36,10 @@ export const InputAnoVct = styled.input`
   display: block;
   border: none;
   height: 24px;
+
+  @media (max-width: 768px) {
+    width: 100px;
+  }
 `
 export const TextVCt = styled.p`
   font-size: 14px;

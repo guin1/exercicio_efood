@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent } from 'react'
+import { useFormik } from 'formik'
 import {
   BotaoBarra,
   BotaoBarra2,
@@ -22,11 +23,11 @@ import { ProdutoNoCarrinho } from '../../../store/reducers/cart'
 interface PagamentoFormProps {
   handleContinuarClick: () => void
   submeterInputs: () => void
-  mostrarVoltarCarrinho: boolean
   itensNoCarrinho: ProdutoNoCarrinho[]
 }
 
 const PagamentoForm: React.FC<PagamentoFormProps> = ({
+  // handleContinuarClick,
   submeterInputs,
   itensNoCarrinho
 }) => {
@@ -34,17 +35,62 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
   const [mostrarPedidoConcluido, setMostrarPedidoConcluido] = useState(false)
   const [orderId, setOrderId] = useState<string | null>(null)
 
-  const [formData, setFormData] = useState({
-    cardOwner: '',
-    cardNumber: '',
-    cardCode: '',
-    expiresMonth: '',
-    expiresYear: ''
+  const form = useFormik({
+    initialValues: {
+      cardOwner: '',
+      cardNumber: '',
+      cardCode: '',
+      expiresMonth: '',
+      expiresYear: ''
+    },
+    onSubmit: async (values) => {
+      try {
+        const data = {
+          products: [{ id: 1, price: 0 }],
+          payment: {
+            card: {
+              name: values.cardOwner,
+              number: values.cardNumber,
+              code: parseInt(values.cardCode),
+              expires: {
+                month: parseInt(values.expiresMonth),
+                year: parseInt(values.expiresYear)
+              }
+            }
+          }
+        }
+        const response = await fetch(
+          'https://fake-api-tau.vercel.app/api/efood/checkout',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }
+        )
+
+        if (response.ok) {
+          const responseData = await response.json()
+
+          if (responseData && responseData.orderId) {
+            const orderId = responseData.orderId
+            console.log(`Número do pedido recebido da API: ${orderId}`)
+            setOrderId(orderId)
+            setMostrarPedidoConcluido(true)
+          }
+        } else {
+          console.error('Erro ao realizar o pedido:', response.statusText)
+        }
+      } catch (error) {
+        console.error('Erro ao processar o pagamento:', error)
+      }
+    }
   })
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prevData) => ({ ...prevData, [name]: value }))
+    // const { name, value } = e.target
+    form.handleChange(e) // Atualizando o valor do Formik
   }
 
   const handleSubmit = () => {
@@ -52,9 +98,35 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
     setMostrarEntregaForm(true)
   }
 
-  const handleContinuarClick = () => {
-    // handleRespostaAPI('123')
-    setMostrarPedidoConcluido(true)
+  const handleContinuarPagamento = async () => {
+    form.handleSubmit()
+
+    if (form.isValid && Object.keys(form.errors).length === 0) {
+      console.log('Formulário válido. Continuar com o pagamento')
+
+      try {
+        const response = await fetch(
+          'https://fake-api-tau.vercel.app/api/efood/checkout'
+        )
+
+        if (response.ok) {
+          const responseData = await response.json()
+
+          if (responseData && responseData.orderId) {
+            const orderId = responseData.orderId
+            console.log(`Número do pedido recebido da API: ${orderId}`)
+            setOrderId(orderId)
+            setMostrarPedidoConcluido(true)
+          }
+        } else {
+          console.error('Erro ao realizar o pedido:', response.statusText)
+        }
+      } catch (error) {
+        console.error('Erro ao processar o pagamento:', error)
+      }
+    } else {
+      console.log('Formulário inválido. Não pode continuar com o pagamento')
+    }
   }
 
   const valorTotalCarrinho = itensNoCarrinho
@@ -74,7 +146,7 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
         />
       ) : mostrarPedidoConcluido ? (
         <PedidoConcluido
-          onClose={() => setMostrarPedidoConcluido(true)}
+          onClose={() => setMostrarPedidoConcluido(false)}
           orderId={orderId !== null ? orderId.toString() : ''}
         />
       ) : (
@@ -86,7 +158,7 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
               id="cardOwner"
               type="text"
               name="cardOwner"
-              value={formData.cardOwner}
+              value={form.values.cardOwner}
               onChange={handleChange}
             />
           </label>
@@ -97,7 +169,7 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
                 id="cardNumber"
                 type="text"
                 name="cardNumber"
-                value={formData.cardNumber}
+                value={form.values.cardNumber}
                 onChange={handleChange}
               />
             </label>
@@ -107,7 +179,7 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
                 id="cardCode"
                 type="text"
                 name="cardCode"
-                value={formData.cardCode}
+                value={form.values.cardCode}
                 onChange={handleChange}
               />
             </label>
@@ -119,7 +191,7 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
                 id="expiresMonth"
                 type="text"
                 name="expiresMonth"
-                value={formData.expiresMonth}
+                value={form.values.expiresMonth}
                 onChange={handleChange}
               />
             </label>
@@ -129,14 +201,17 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
                 id="expiresYear"
                 type="text"
                 name="expiresYear"
-                value={formData.expiresYear}
+                value={form.values.expiresYear}
                 onChange={handleChange}
               />
             </label>
           </ContainerCepNumero>
-          <p>${orderId}</p>
           <div>
-            <BotaoBarra onClick={handleContinuarClick}>
+            <BotaoBarra
+              type="button"
+              onClick={handleContinuarPagamento}
+              className="BotaoBarra"
+            >
               Finalizar Pagamento
             </BotaoBarra>
           </div>

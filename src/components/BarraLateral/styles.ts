@@ -17,6 +17,12 @@ export const ContainerBarraLateral = styled.div`
     width: 72%;
   }
 `
+
+export const ContainerInputs = styled.div`
+  @media (max-width: 768px) {
+    width: 72%;
+  }
+`
 export const CardBarra = styled.div`
   display: flex;
   background-color: ${cores.branca};
@@ -132,6 +138,10 @@ export const Input = styled.input`
   margin-bottom: 8px;
   border: none;
   height: 24px;
+
+  @media (max-width: 768px) {
+    width: 250px;
+  }
 `
 export const TextInput = styled.p`
   text-align: left;
@@ -145,11 +155,19 @@ export const InputCep = styled.input`
   width: 130px;
   display: block;
   height: 24px;
+
+  @media (max-width: 768px) {
+    width: 105px;
+  }
 `
 export const InputNumero = styled.input`
   display: block;
   width: 130px;
   height: 24px;
+
+  @media (max-width: 768px) {
+    width: 105px;
+  }
 `
 //botoes
 
@@ -162,6 +180,10 @@ export const BotaoBarra = styled.button`
   cursor: pointer;
   margin-bottom: 5px;
   margin-top: 10px;
+
+  @media (max-width: 768px) {
+    width: 250px;
+  }
 `
 export const BotaoBarra2 = styled.button`
   width: 300px;
@@ -170,4 +192,8 @@ export const BotaoBarra2 = styled.button`
   font-size: 14px;
   height: 24px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 250px;
+  }
 `

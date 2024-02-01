@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   ContainerCepNumero,
   Entrega,
@@ -8,12 +8,12 @@ import {
   LabelNumero,
   TextInput,
   BotaoBarra,
-  BotaoBarra2
+  BotaoBarra2,
+  ContainerInputs
 } from '../styles'
 import { useFormik } from 'formik'
 import PagamentoForm from '../Pagamento'
 import { ProdutoNoCarrinho } from '../../../store/reducers/cart'
-import PedidoConcluido from '../PedidoConcluido'
 
 interface EntregaFormProps {
   onVoltarBarraLateral: () => void
@@ -25,7 +25,6 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
   itensNoCarrinho
 }) => {
   const [mostrarPagamentoForm, setMostrarPagamentoForm] = useState(false)
-  const [mostrarPedidoConcluido, setMostrarPedidoConcluido] = useState(true)
   const [orderId, setNumeroPedido] = useState<string | null>(null)
 
   const form = useFormik({
@@ -70,7 +69,6 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
           }
         }
 
-        // Chamada para a API de checkout
         const response = await fetch(
           'https://fake-api-tau.vercel.app/api/efood/checkout',
           {
@@ -87,7 +85,7 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
 
           if (responseData && responseData.orderId) {
             const orderId = responseData.orderId
-            console.log(`Número do pedido recebido da API: ${orderId}`)
+            // console.log(`Número do pedido recebido da API: ${orderId}`)
             setNumeroPedido(orderId)
             setMostrarPagamentoForm(true)
           }
@@ -100,25 +98,12 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
     }
   })
 
-  // useEffect(() => {
-  //   if (orderId !== null) {
-  //     setMostrarPagamentoForm(true)
-  //   }
-  // }, [orderId])
-
   const handleContinuarPagamento = () => {
     form.handleSubmit()
-
-    if (form.isValid && Object.keys(form.errors).length === 0) {
-      console.log('Formulário válido. Continuar com o pagamento')
-    } else {
-      console.log('Formulário inválido. Não pode continuar com o pagamento')
-    }
   }
 
   const handleContinuarClick = () => {
     console.log('Continuar com o pagamento')
-    // setMostrarPagamentoForm(true)
   }
 
   const submeterInputs = () => {
@@ -128,7 +113,7 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
   return (
     <div>
       {!mostrarPagamentoForm && orderId === null && (
-        <div>
+        <ContainerInputs>
           <label htmlFor="fullName">
             <Entrega>Entrega</Entrega>
             <TextInput>Quem irá receber:</TextInput>
@@ -209,22 +194,15 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
               Voltar para a barra lateral
             </BotaoBarra2>
           </div>
-        </div>
+        </ContainerInputs>
       )}
 
       {mostrarPagamentoForm && (
         <PagamentoForm
           handleContinuarClick={handleContinuarClick}
           submeterInputs={submeterInputs}
-          mostrarVoltarCarrinho={false}
+          // mostrarVoltarCarrinho={false}
           itensNoCarrinho={itensNoCarrinho}
-        />
-      )}
-
-      {mostrarPedidoConcluido && orderId !== null && (
-        <PedidoConcluido
-          onClose={() => setMostrarPedidoConcluido(false)}
-          orderId={orderId.toString()}
         />
       )}
     </div>
