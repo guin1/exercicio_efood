@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import * as Yup from 'yup'
 import {
   ContainerCepNumero,
   Entrega,
@@ -9,7 +10,8 @@ import {
   TextInput,
   BotaoBarra,
   BotaoBarra2,
-  ContainerInputs
+  ContainerInputs,
+  ErrorText
 } from '../styles'
 import { useFormik } from 'formik'
 import PagamentoForm from '../Pagamento'
@@ -40,15 +42,68 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
       cardNumber: '',
       cardCode: '',
       expiresMonth: '',
-      expiresYear: ''
+      expiresYear: '',
+      continuarPagamento: false
     },
+    validationSchema: Yup.object({
+      fullName: Yup.string()
+        .min(5, 'Nome inválido')
+        .required('Nome obrigatório'),
+      adress: Yup.string()
+        .min(4, 'Endereço inválido')
+        .required('Endereço obrigatório'),
+      city: Yup.string()
+        .min(5, 'Endereço inválido')
+        .required('Endereço obrigatório'),
+      zipCode: Yup.string()
+        .min(8, 'CEP inválido')
+        .max(9, 'CEP inválido')
+        .required('CEP obrigatório'),
+      number: Yup.string()
+        .min(1, 'Número inválido')
+        .required('Nmr obrigatório'),
+      cardOwner: Yup.number()
+        .min(9, 'ct inválido')
+        .max(9, 'Ct inválido')
+        .when('continuarPagamento', {
+          is: true,
+          then: Yup.string()
+            .min(5, 'Nome inválido')
+            .required('Nome no cartão obrigatório') as any
+        }),
+      cardNumber: Yup.number().when('continuarPagamento', {
+        is: true,
+        then: Yup.number()
+          .min(12)
+          .max(12)
+          .required('Número do cartão obrigatório') as any
+      }),
+      cardCode: Yup.number().when('continuarPagamento', {
+        is: true,
+        then: Yup.number().min(3).max(3).required('obrigatório') as any
+      }),
+      expiresMonth: Yup.number().when('continuarPagamento', {
+        is: true,
+        then: Yup.number()
+          .min(2)
+          .max(2)
+          .required('Mês de vencimento obrigatório') as any
+      }),
+      expiresYear: Yup.number().when('continuarPagamento', {
+        is: true,
+        then: Yup.number()
+          .min(4)
+          .max(4)
+          .required('Ano de vencimento obrigatório') as any
+      })
+    }),
     onSubmit: async (values) => {
       try {
         const data = {
           products: [{ id: 1, price: 0 }],
           delivery: {
             receiver: values.fullName,
-            address: {
+            adress: {
               description: values.adress,
               city: values.city,
               zipCode: values.zipCode,
@@ -125,6 +180,9 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
               onChange={form.handleChange}
               onBlur={form.handleBlur}
             />
+            {form.touched.fullName && form.errors.fullName ? (
+              <ErrorText>{form.errors.fullName}</ErrorText>
+            ) : null}
           </label>
           <label htmlFor="adress">
             <TextInput>Endereço:</TextInput>
@@ -136,6 +194,9 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
               onChange={form.handleChange}
               onBlur={form.handleBlur}
             />
+            {form.touched.adress && form.errors.adress ? (
+              <ErrorText>{form.errors.adress}</ErrorText>
+            ) : null}
           </label>
           <label htmlFor="city">
             <TextInput>Cidade:</TextInput>
@@ -147,6 +208,9 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
               onChange={form.handleChange}
               onBlur={form.handleBlur}
             />
+            {form.touched.city && form.errors.city ? (
+              <ErrorText>{form.errors.city}</ErrorText>
+            ) : null}
           </label>
           <ContainerCepNumero>
             <label htmlFor="zipCode">
@@ -159,6 +223,9 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
               />
+              {form.touched.zipCode && form.errors.zipCode ? (
+                <ErrorText>{form.errors.zipCode}</ErrorText>
+              ) : null}
             </label>
             <LabelNumero htmlFor="number">
               <TextInput>Número:</TextInput>
@@ -170,6 +237,9 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
               />
+              {form.touched.number && form.errors.number ? (
+                <ErrorText>{form.errors.number}</ErrorText>
+              ) : null}
             </LabelNumero>
           </ContainerCepNumero>
           <label htmlFor="complement">
@@ -182,6 +252,9 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
               onChange={form.handleChange}
               onBlur={form.handleBlur}
             />
+            {form.touched.complement && form.errors.complement ? (
+              <ErrorText>{form.errors.complement}</ErrorText>
+            ) : null}
           </label>
 
           <div>

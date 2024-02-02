@@ -1,12 +1,14 @@
 import React, { useState, ChangeEvent } from 'react'
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import {
   BotaoBarra,
   BotaoBarra2,
   ContainerCepNumero,
   Entrega,
   Input,
-  TextInput
+  TextInput,
+  ErrorText
 } from '../styles'
 import {
   InputAnoVct,
@@ -43,6 +45,13 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
       expiresMonth: '',
       expiresYear: ''
     },
+    validationSchema: Yup.object({
+      cardOwner: Yup.string().required('Nome no cartão obrigatório'),
+      cardNumber: Yup.string().required('Número do cartão obrigatório'),
+      cardCode: Yup.string().required('obrigatório'),
+      expiresMonth: Yup.string().required('Mês de vencimento obrigatório'),
+      expiresYear: Yup.string().required('Ano de vencimento obrigatório')
+    }),
     onSubmit: async (values) => {
       try {
         const data = {
@@ -59,6 +68,12 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
             }
           }
         }
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+          form.handleChange(e)
+        }
+
         const response = await fetch(
           'https://fake-api-tau.vercel.app/api/efood/checkout',
           {
@@ -89,8 +104,7 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
   })
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // const { name, value } = e.target
-    form.handleChange(e) // Atualizando o valor do Formik
+    form.handleChange(e)
   }
 
   const handleSubmit = () => {
@@ -161,6 +175,9 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
               value={form.values.cardOwner}
               onChange={handleChange}
             />
+            {form.touched.cardOwner && form.errors.cardOwner ? (
+              <ErrorText>{form.errors.cardOwner}</ErrorText>
+            ) : null}
           </label>
           <ContainerCepNumero>
             <label htmlFor="cardNumber">
@@ -172,6 +189,9 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
                 value={form.values.cardNumber}
                 onChange={handleChange}
               />
+              {form.touched.cardNumber && form.errors.cardNumber ? (
+                <ErrorText>{form.errors.cardNumber}</ErrorText>
+              ) : null}
             </label>
             <label htmlFor="cardCode">
               <TextCVV>CVV:</TextCVV>
@@ -182,6 +202,9 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
                 value={form.values.cardCode}
                 onChange={handleChange}
               />
+              {form.touched.cardCode && form.errors.cardCode ? (
+                <ErrorText>{form.errors.cardCode}</ErrorText>
+              ) : null}
             </label>
           </ContainerCepNumero>
           <ContainerCepNumero>
@@ -194,6 +217,9 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
                 value={form.values.expiresMonth}
                 onChange={handleChange}
               />
+              {form.touched.expiresMonth && form.errors.expiresMonth ? (
+                <ErrorText>{form.errors.expiresMonth}</ErrorText>
+              ) : null}
             </label>
             <label htmlFor="expiresYear">
               <TextVCt>Ano de vencimento:</TextVCt>
@@ -204,6 +230,9 @@ const PagamentoForm: React.FC<PagamentoFormProps> = ({
                 value={form.values.expiresYear}
                 onChange={handleChange}
               />
+              {form.touched.expiresYear && form.errors.expiresYear ? (
+                <ErrorText>{form.errors.expiresYear}</ErrorText>
+              ) : null}
             </label>
           </ContainerCepNumero>
           <div>

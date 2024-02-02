@@ -1,6 +1,7 @@
 import React from 'react'
 import { BotaoBarra, Entrega } from '../styles'
 import { ContainerText, TextP } from './styles'
+import { NavLink } from 'react-router-dom'
 // import { NavLink } from 'react-router-dom'
 
 interface PedidoConcluidoProps {
@@ -28,7 +29,9 @@ const PedidoConcluido: React.FC<PedidoConcluidoProps> = ({ orderId }) => (
       gastronômica.
       <br /> Bom apetite!
     </TextP>
-    <BotaoBarra>Concluir</BotaoBarra>
+    <NavLink to="/">
+      <BotaoBarra>Concluir</BotaoBarra>
+    </NavLink>
   </ContainerText>
 )
 

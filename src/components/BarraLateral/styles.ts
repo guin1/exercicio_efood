@@ -169,6 +169,13 @@ export const InputNumero = styled.input`
     width: 105px;
   }
 `
+
+export const ErrorText = styled.p`
+  color: red;
+  margin-top: px;
+  font-size: 14px;
+`
+
 //botoes
 
 export const BotaoBarra = styled.button`
@@ -176,6 +183,8 @@ export const BotaoBarra = styled.button`
   color: ${cores.rosa};
   border: none;
   font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
   height: 24px;
   cursor: pointer;
   margin-bottom: 5px;
@@ -190,6 +199,8 @@ export const BotaoBarra2 = styled.button`
   color: ${cores.rosa};
   border: none;
   font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
   height: 24px;
   cursor: pointer;
 
