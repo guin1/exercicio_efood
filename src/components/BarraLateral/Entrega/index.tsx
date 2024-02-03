@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import {
   ContainerCepNumero,
@@ -153,8 +153,15 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
     }
   })
 
+  useEffect(() => {
+    const savedValues = JSON.parse(localStorage.getItem('formValues') || '{}')
+    form.setValues(savedValues)
+  }, [])
+
   const handleContinuarPagamento = () => {
+    localStorage.setItem('formValues', JSON.stringify(form.values))
     form.handleSubmit()
+    setMostrarPagamentoForm(true)
   }
 
   const handleContinuarClick = () => {
@@ -264,7 +271,7 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
           </div>
           <div>
             <BotaoBarra2 type="button" onClick={onVoltarBarraLateral}>
-              Voltar para a barra lateral
+              Voltar para o carrinho
             </BotaoBarra2>
           </div>
         </ContainerInputs>
