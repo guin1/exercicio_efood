@@ -62,7 +62,7 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
       number: Yup.string()
         .min(1, 'Número inválido')
         .required('Nmr obrigatório'),
-      cardOwner: Yup.number()
+      cardOwner: Yup.string()
         .min(9, 'ct inválido')
         .max(9, 'Ct inválido')
         .when('continuarPagamento', {
@@ -155,13 +155,20 @@ const EntregaForm: React.FC<EntregaFormProps> = ({
 
   useEffect(() => {
     const savedValues = JSON.parse(localStorage.getItem('formValues') || '{}')
-    form.setValues(savedValues)
+    if (form) {
+      form.setValues(savedValues)
+    }
   }, [])
 
   const handleContinuarPagamento = () => {
     localStorage.setItem('formValues', JSON.stringify(form.values))
-    form.handleSubmit()
-    setMostrarPagamentoForm(true)
+    console.log('Formulário válido?', form.isValid)
+    if (form.isValid) {
+      form.handleSubmit()
+      setMostrarPagamentoForm(true)
+    } else {
+      console.log('Formulário inválido. Não pode continuar com o pagamento')
+    }
   }
 
   const handleContinuarClick = () => {
