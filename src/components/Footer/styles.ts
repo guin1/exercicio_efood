@@ -1,46 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
 
-export const FooterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 298px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 400;
-  margin-top: 56px;
-  color: ${cores.rosa};
-  background-color: ${cores.fundo};
-
-  div {
-    margin-top: 10px;
-  }
-
-  img {
-    margin: 5px;
-    width: 88;
-  }
-
-  @media (max-width: 768px) {
-    // width: 95%;
-  }
-`
-
-export const TextFooter = styled.p`
-  text-align: center;
-  margin-top: 100px;
-  margin-bottom: 15px;
-  font-size: 14px;
-
-  @media (max-width: 768px) {
-    width: 95%;
-  }
-`
-export const LogoContainer = styled.div`
-  img {
-    width: 125px;
-    height: 57.5px;
-  }
+export const ContainerFooter = styled.div`
+  margin-top: 32px;
 `
